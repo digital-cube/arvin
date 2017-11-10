@@ -1,0 +1,69 @@
+.app-calendar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .app-week{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+
+    .app-day{
+      width: 100px;
+      height: 100px;
+      padding: 5px;
+      margin: 10px;
+      background-color: #3f51b5;
+    }
+
+  }
+}
+
+table {
+  tr {
+    height: 60px;
+  }
+}
+
+tbody {
+  td {
+    }
+  }
+
+
+table {
+  thead {
+    tr {
+      th{
+
+      }
+    }
+  }
+  tbody {
+    tr{
+
+    }
+  }
+}
+//<thead>
+//<tr>
+//<th *ngFor="let d of days">
+//                          {{d}}
+//</th>
+//</tr>
+//</thead>
+//</table>
+//<tbody>
+//<tr *ngFor="let w of calendar">
+//<td *ngFor="let d of w">
+//                       {{d}}
+//</td>
+//</tr>
+//</tbody>

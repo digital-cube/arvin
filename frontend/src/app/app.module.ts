@@ -17,6 +17,12 @@ import {ApiCallsService} from './services/api-calls.service';
 import {DashboardComponent} from './routes/home/dashboard/dashboard.component';
 import {RouterGuardService} from './services/router-guard.service';
 import {ResetPasswordComponent} from './routes/reset-password/reset-password.component';
+import {ProfileComponent} from "./routes/home/profile/profile.component";
+import {CalendarComponent} from "./routes/home/calendar/calendar.component";
+import {MedicalRecordsComponent} from "./routes/home/medical-records/medical-records.component";
+import {PatientRecordComponent} from "./routes/home/medical-records/patient-record/patient-record.component";
+import {RecordComponent} from "./routes/home/record/record.component";
+
 
 @NgModule({
   declarations: [
@@ -26,7 +32,12 @@ import {ResetPasswordComponent} from './routes/reset-password/reset-password.com
     SignupComponent,
     ForgotPasswordComponent,
     DashboardComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ProfileComponent,
+    CalendarComponent,
+    MedicalRecordsComponent,
+    PatientRecordComponent,
+    RecordComponent
 ],
   imports: [
     HttpModule,

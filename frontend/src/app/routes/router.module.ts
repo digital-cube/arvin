@@ -9,12 +9,22 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import {RouterGuardService} from '../services/router-guard.service';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import {ProfileComponent} from "./home/profile/profile.component";
+import {CalendarComponent} from "./home/calendar/calendar.component";
+import {MedicalRecordsComponent} from "./home/medical-records/medical-records.component";
+import {PatientRecordComponent} from "./home/medical-records/patient-record/patient-record.component";
+import {RecordComponent} from "./home/record/record.component";
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent,
-    children: [
+    path: '', component: HomeComponent, children: [
       {path: '', component: DashboardComponent},
+      {path: 'profile', component: ProfileComponent},
+      {path: 'calendar', component: CalendarComponent},
+      {path: 'record', component: RecordComponent},
+      {path: 'medical-records', component: MedicalRecordsComponent,  children: [
+        {path: ':id', component: PatientRecordComponent},
+      ]},
     ], canActivate: [RouterGuardService]
   },
   {path: 'login', component: LoginComponent},
