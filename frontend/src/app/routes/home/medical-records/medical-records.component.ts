@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -8,6 +9,8 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class MedicalRecordsComponent implements OnInit{
+
+
   ngOnInit(){
     console.log('MEDICAL RECORDS');
   }

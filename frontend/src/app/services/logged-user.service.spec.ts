@@ -32,3 +32,5 @@ describe('LoggedUserService', () => {
     expect(service.getToken()).toEqual(_token);
   }));
 });
+
+

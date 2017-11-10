@@ -11,99 +11,275 @@ export class CalendarComponent implements OnInit{
 
   days= ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-
   calendar = [
     [
-      // {
-      //   year: 2017,
-      //   month: 'October',
-      //   day: 'Mon',
-      //   dayInMonth: 23
-      // }
-      'Mon 23. October 2017.',
-      'Tue 24. October 2017.',
-      'Wed 25. October 2017.',
-      'Thu 26. October 2017.',
-      'Fri 27. October 2017.',
-      'Sat 28. October 2017.',
-      'Sun 29. October 2017.',
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Mon',
+        dayInMonth: 30
+      },
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Tue',
+        dayInMonth: 31
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Wed',
+        dayInMonth: 1
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Thu',
+        dayInMonth: 2
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Fri',
+        dayInMonth: 3
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sat',
+        dayInMonth: 4
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sun',
+        dayInMonth: 5
+      }
     ],
     [
-      'Mon 30. October 2017.',
-      'Tue 31. October 2017.',
-      'Wed 01. November 2017.',
-      'Thu 02. November 2017.',
-      'Fri 03. November 2017.',
-      'Sat 04. November 2017.',
-      'Sun 05. November 2017.',
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Mon',
+        dayInMonth: 6
+      },
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Tue',
+        dayInMonth: 7
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Wed',
+        dayInMonth: 8
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Thu',
+        dayInMonth: 9
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Fri',
+        dayInMonth: 10
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sat',
+        dayInMonth: 11
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sun',
+        dayInMonth: 12
+      }
     ],
     [
-      'Mon 30. October 2017.',
-      'Tue 31. October 2017.',
-      'Wed 01. November 2017.',
-      'Thu 02. November 2017.',
-      'Fri 03. November 2017.',
-      'Sat 04. November 2017.',
-      'Sun 05. November 2017.',
-    ]
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Mon',
+        dayInMonth: 13
+      },
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Tue',
+        dayInMonth: 14
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Wed',
+        dayInMonth: 15
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Thu',
+        dayInMonth: 16
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Fri',
+        dayInMonth: 17
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sat',
+        dayInMonth: 18
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sun',
+        dayInMonth: 19
+      }
+    ],
+    [
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Mon',
+        dayInMonth: 20
+      },
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Tue',
+        dayInMonth: 21
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Wed',
+        dayInMonth: 22
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Thu',
+        dayInMonth: 23
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Fri',
+        dayInMonth: 24
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sat',
+        dayInMonth: 25
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Sun',
+        dayInMonth: 26
+      }
+    ],
+    [
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Mon',
+        dayInMonth: 27
+      },
+      {
+        year: 2017,
+        month: 'October',
+        day: 'Tue',
+        dayInMonth: 28
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Wed',
+        dayInMonth: 29
+      },
+      {
+        year: 2017,
+        month: 'November',
+        day: 'Thu',
+        dayInMonth: 30
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Fri',
+        dayInMonth: 1
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Sat',
+        dayInMonth: 2
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Sun',
+        dayInMonth: 3
+      }
+    ],
+    [
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Mon',
+        dayInMonth: 4
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Tue',
+        dayInMonth: 5
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Wed',
+        dayInMonth: 6
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Thu',
+        dayInMonth: 7
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Fri',
+        dayInMonth: 8
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Sat',
+        dayInMonth: 9
+      },
+      {
+        year: 2017,
+        month: 'December',
+        day: 'Sun',
+        dayInMonth: 10
+      }
+    ],
   ];
 
 
 
-    // 'Mon 30. October 2017.',
-    // 'Tue 31. October 2017.',
-    // 'Wed 01. November 2017.',
-    // 'Thu 02. November 2017.',
-    // 'Fri 03. November 2017.',
-    // 'Sat 04. November 2017.',
-    // 'Sun 05. November 2017.',
-    //
-    // 'Mon 06. November 2017.',
-    // 'Tue 07. November 2017.',
-    // 'Wed 08. November 2017.',
-    // 'Thu 09. November 2017.',
-    // 'Fri 10. November 2017.',
-    // 'Sat 11. November 2017.',
-    // 'Sun 12. November 2017.',
-    //
-    // 'Mon 13. November 2017.',
-    // 'Tue 14. November 2017.',
-    // 'Wed 15. November 2017.',
-    // 'Thu 16. November 2017.',
-    // 'Fri 17. November 2017.',
-    // 'Sat 18. November 2017.',
-    // 'Sun 19. November 2017.',
-    //
-    // 'Mon 20. November 2017.',
-    // 'Tue 21. November 2017.',
-    // 'Wed 22. November 2017.',
-    // 'Thu 23. November 2017.',
-    // 'Fri 24. November 2017.',
-    // 'Sat 25. November 2017.',
-    // 'Sun 26. November 2017.',
-    //
-    // 'Mon 27. November 2017.',
-    // 'Tue 28. November 2017.',
-    // 'Wed 29. November 2017.',
-    // 'Thu 30. November 2017.',
-    // 'Fri 01. December 2017.',
-    // 'Sat 02. December 2017.',
-    // 'Sun 03. December 2017.',
-    //
-    // 'Mon 13. November 2017.',
-    // 'Tue 14. November 2017.',
-    // 'Wed 15. November 2017.',
-    // 'Thu 16. November 2017.',
-    // 'Fri 10. November 2017.',
-    // 'Sat 1a. November 2017.',
-    // 'Sun 12. November 2017.',
-    //
-    // 'Mon 13. November 2017.',
-    // 'Tue 14. November 2017.',
-    // 'Wed 15. November 2017.',
-    // 'Thu 16. November 2017.',
-
-  // ];
 
 
 
