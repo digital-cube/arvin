@@ -1,3 +1,4 @@
+<mat-card class="login-card">
 <div class="login-form">
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
     <mat-form-field>
@@ -13,3 +14,4 @@
   </div>
   <mat-error *ngIf="apiError">{{apiError}}</mat-error>
 </div>
+</mat-card>
