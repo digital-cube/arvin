@@ -33,6 +33,8 @@ class User(base.common.orm.sql_base):
     id = Column(CHAR(10), ForeignKey(AuthUser.id), primary_key=True)
     first_name = Column(String(64))
     last_name = Column(String(64))
+    admin_id = Column(String(64))
+    user
     data = Column(Text)
     auth_user = relationship("AuthUser", back_populates="user")
 
@@ -42,6 +44,22 @@ class User(base.common.orm.sql_base):
         self.first_name = first_name
         self.last_name = last_name
         self.data = data
+
+
+class MedicalRecords(base.common.orm.sql_base):
+
+    __tablename__ = 'medical_records'
+
+    id = Column(CHAR(10), ForeignKey(AuthUser.id), primary_key=True)
+    time_created = Column(DateTime, nullable=False, default=datetime.datetime.now())
+    ssn = Column(String(64), nullable=False, index=True, unique=True)
+    # pin = Column(String(16), nullable=False)
+    enc_key = Column(String(128), nullable=False)
+    record_path = Column(String(256), nullable=False)
+    have_personal_data = Column(Boolean, index=True, nullable=False, default=False)
+    have_admins_data = Column(Boolean, index=True, nullable=False, default=False)
+    personal_data_files = Column(Text, nullable=True)
+    admins_data_files = Column(Text, nullable=True)
 
 
 def main():

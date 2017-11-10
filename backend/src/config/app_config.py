@@ -13,7 +13,7 @@ models = [
     'src.models.utils',
 ]
 imports = [
-    'src.api.hello',
+    'src.api.medical_records',
 ]
 db_type = 'mysql'
 db_config = 'db_config.json'
