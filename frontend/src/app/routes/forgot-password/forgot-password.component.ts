@@ -4,10 +4,30 @@ import {Router} from '@angular/router';
 
 import {ApiCallsService} from '../../services/api-calls.service';
 import {MatSnackBar} from "@angular/material";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
+  animations: [
+    trigger(
+      'errorAnimate',
+      [
+        transition(
+          ':enter', [
+            style({ opacity: 0}),
+            animate('500ms', style({'opacity': 1}))
+          ]
+        ),
+        transition(
+          ':leave', [
+            style({'opacity': 1}),
+            animate('500ms', style({'opacity': 0}))
+
+          ]
+        )]
+    )
+  ],
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
@@ -16,7 +36,8 @@ export class ForgotPasswordComponent implements OnInit {
     'username': new FormControl('', [Validators.required, Validators.email])
   });
   apiError: string;
-
+  _error_timeout: any;
+  _error_show_timeout = 3000;  // milliseconds
   constructor(private apiSvc: ApiCallsService, private router: Router, private sb: MatSnackBar) { }
 
   ngOnInit() {
@@ -38,6 +59,20 @@ export class ForgotPasswordComponent implements OnInit {
         this.apiError = 'Error save request';
       }
     );
+    if (this._error_timeout) {
+      clearTimeout(this._error_timeout);
+    }
+
+    // this.apiError = _err;
+    this._error_timeout = setTimeout(() => {
+      this.reset_error();
+    }, this._error_show_timeout)
+  }
+
+  reset_error() {
+    //noinspection JSAnnotator
+    delete this.apiError;
+    this._error_timeout = false;
   }
 
 }

@@ -19,11 +19,16 @@ export class SignupComponent implements OnInit {
     'username': new FormControl('', [Validators.email, Validators.required]),
     'password': new FormControl('', Validators.required),
     'data': new FormGroup({
-      'role_flags': new FormControl(`${this.lookup.roles.USER}`)
+      'role_flags': new FormControl(`${this.lookup.roles.USER}`),
+      'first_name': new FormControl('', Validators.required),
+      'last_name': new FormControl('', Validators.required),
+      'phone': new FormControl('', Validators.required)
     }),
   });
   refObjectKeys = Object.keys;
   apiError: string;
+  _error_timeout: any;
+  _error_show_timeout = 3000;  // milliseconds
 
   constructor(
     private lookup: LookupService,
@@ -43,6 +48,9 @@ export class SignupComponent implements OnInit {
       'password': '',
       'data': {
         'role_flags': `${this.lookup.roles.USER}`
+        'first_name': '',
+        'last_name': '',
+        'phone':''
       }
     });
   }
@@ -71,6 +79,20 @@ export class SignupComponent implements OnInit {
     catch (error) {
       console.log('Error load body:', err.text(), error);
     }
+    if (this._error_timeout) {
+      clearTimeout(this._error_timeout);
+    }
+
+    // this.apiError = _err;
+    this._error_timeout = setTimeout(() => {
+      this.reset_error();
+    }, this._error_show_timeout)
+  }
+
+  reset_error() {
+    //noinspection JSAnnotator
+    delete this.apiError;
+    this._error_timeout = false;
   }
 
 }
