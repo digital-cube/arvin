@@ -1,0 +1,37 @@
+<div *ngFor="let w of calendar" class="app-calendar">
+
+  <div  *ngFor="let d of w " class="app-week">
+
+    <div class="app-day">
+
+        {{d}}
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!--<div *ngFor="let day of calendar">-->
+  <!--{{day}}-->
+<!--</div>-->
+
+
+<table>
+  <thead>
+  <tr>
+    <th *ngFor="let d of days">
+      {{d}}
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let w of calendar">
+      <td *ngFor="let d of w">
+        {{d}}
+      </td>
+    </tr>
+  </tbody>
+</table>
