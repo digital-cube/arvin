@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
       'username': '',
       'password': '',
       'data': {
-        'role_flags': `${this.lookup.roles.USER}`
+        'role_flags': `${this.lookup.roles.USER}`,
         'first_name': '',
         'last_name': '',
         'phone':''
