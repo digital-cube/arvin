@@ -1,0 +1,341 @@
+-- MySQL dump 10.16  Distrib 10.2.10-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: arvin
+-- ------------------------------------------------------
+-- Server version	10.2.9-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `auth_users`
+--
+
+DROP TABLE IF EXISTS `auth_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_users` (
+  `id` char(10) NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `role_flags` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_auth_users_username` (`username`),
+  KEY `ix_auth_users_active` (`active`),
+  KEY `ix_auth_users_role_flags` (`role_flags`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`active` in (0,1))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_users`
+--
+
+LOCK TABLES `auth_users` WRITE;
+/*!40000 ALTER TABLE `auth_users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hash_2_params`
+--
+
+DROP TABLE IF EXISTS `hash_2_params`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hash_2_params` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hash` char(64) NOT NULL,
+  `created` datetime NOT NULL,
+  `time_to_live` int(11) DEFAULT NULL,
+  `expire_after_first_access` tinyint(1) NOT NULL,
+  `last_access` datetime NOT NULL,
+  `data` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_hash_2_params_hash` (`hash`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`expire_after_first_access` in (0,1))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hash_2_params`
+--
+
+LOCK TABLES `hash_2_params` WRITE;
+/*!40000 ALTER TABLE `hash_2_params` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hash_2_params` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hash_2_params_history_log`
+--
+
+DROP TABLE IF EXISTS `hash_2_params_history_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hash_2_params_history_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_hash_2_params` int(11) NOT NULL,
+  `log_time` datetime NOT NULL,
+  `data` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_hash_2_params` (`id_hash_2_params`),
+  CONSTRAINT `hash_2_params_history_log_ibfk_1` FOREIGN KEY (`id_hash_2_params`) REFERENCES `hash_2_params` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hash_2_params_history_log`
+--
+
+LOCK TABLES `hash_2_params_history_log` WRITE;
+/*!40000 ALTER TABLE `hash_2_params_history_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hash_2_params_history_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mail_queue`
+--
+
+DROP TABLE IF EXISTS `mail_queue`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mail_queue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject` varchar(128) NOT NULL,
+  `sender_name` varchar(128) NOT NULL,
+  `sender` varchar(128) NOT NULL,
+  `receiver_name` varchar(128) NOT NULL,
+  `receiver` varchar(128) NOT NULL,
+  `time_created` datetime NOT NULL,
+  `time_sent` datetime DEFAULT NULL,
+  `sent` tinyint(1) NOT NULL,
+  `message` text NOT NULL,
+  `data` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_mail_queue_sent` (`sent`),
+  KEY `ix_mail_queue_sender` (`sender`),
+  KEY `ix_mail_queue_subject` (`subject`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`sent` in (0,1))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mail_queue`
+--
+
+LOCK TABLES `mail_queue` WRITE;
+/*!40000 ALTER TABLE `mail_queue` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mail_queue` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `options`
+--
+
+DROP TABLE IF EXISTS `options`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(64) NOT NULL,
+  `value` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key` (`key`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `options`
+--
+
+LOCK TABLES `options` WRITE;
+/*!40000 ALTER TABLE `options` DISABLE KEYS */;
+INSERT INTO `options` VALUES (1,'version','0.0.1');
+/*!40000 ALTER TABLE `options` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `s_hash_2_params`
+--
+
+DROP TABLE IF EXISTS `s_hash_2_params`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `s_hash_2_params` (
+  `id` char(64) NOT NULL,
+  `active_stage` char(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_s_hash_2_params_active_stage` (`active_stage`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `s_hash_2_params`
+--
+
+LOCK TABLES `s_hash_2_params` WRITE;
+/*!40000 ALTER TABLE `s_hash_2_params` DISABLE KEYS */;
+/*!40000 ALTER TABLE `s_hash_2_params` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `s_session_token`
+--
+
+DROP TABLE IF EXISTS `s_session_token`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `s_session_token` (
+  `id` char(64) NOT NULL,
+  `active_stage` char(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_s_session_token_active_stage` (`active_stage`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `s_session_token`
+--
+
+LOCK TABLES `s_session_token` WRITE;
+/*!40000 ALTER TABLE `s_session_token` DISABLE KEYS */;
+/*!40000 ALTER TABLE `s_session_token` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `s_users`
+--
+
+DROP TABLE IF EXISTS `s_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `s_users` (
+  `id` char(10) NOT NULL,
+  `active_stage` char(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_s_users_active_stage` (`active_stage`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `s_users`
+--
+
+LOCK TABLES `s_users` WRITE;
+/*!40000 ALTER TABLE `s_users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `s_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sequencer`
+--
+
+DROP TABLE IF EXISTS `sequencer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sequencer` (
+  `id` varchar(2) NOT NULL,
+  `s_partition` char(2) NOT NULL,
+  `size` smallint(6) NOT NULL,
+  `active_stage` char(3) NOT NULL,
+  `check_sum_size` smallint(6) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `type` varchar(16) NOT NULL,
+  `s_table` varchar(64) NOT NULL,
+  `ordered` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `s_table` (`s_table`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`ordered` in (0,1))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sequencer`
+--
+
+LOCK TABLES `sequencer` WRITE;
+/*!40000 ALTER TABLE `sequencer` DISABLE KEYS */;
+INSERT INTO `sequencer` VALUES ('h','00',58,'000',0,'hash_2_params','STR','s_hash_2_params',0),('s','00',58,'000',0,'session_token','STR','s_session_token',0),('u','00',4,'000',0,'users','STR','s_users',0);
+/*!40000 ALTER TABLE `sequencer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `session_tokens`
+--
+
+DROP TABLE IF EXISTS `session_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `session_tokens` (
+  `id` char(64) NOT NULL,
+  `id_user` char(10) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `type` smallint(6) NOT NULL,
+  `created` datetime NOT NULL,
+  `expired` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  KEY `ix_session_tokens_type` (`type`),
+  KEY `ix_session_tokens_active` (`active`),
+  CONSTRAINT `session_tokens_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `auth_users` (`id`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`active` in (0,1))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `session_tokens`
+--
+
+LOCK TABLES `session_tokens` WRITE;
+/*!40000 ALTER TABLE `session_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `session_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` char(10) NOT NULL,
+  `first_name` varchar(64) DEFAULT NULL,
+  `last_name` varchar(64) DEFAULT NULL,
+  `data` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id`) REFERENCES `auth_users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-11-10 15:55:44
