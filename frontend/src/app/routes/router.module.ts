@@ -14,6 +14,7 @@ import {CalendarComponent} from "./home/calendar/calendar.component";
 import {MedicalRecordsComponent} from "./home/medical-records/medical-records.component";
 import {PatientRecordComponent} from "./home/medical-records/patient-record/patient-record.component";
 import {RecordComponent} from "./home/record/record.component";
+import {GetRecordComponent} from "./home/medical-records/get-record/get-records.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       {path: 'calendar', component: CalendarComponent},
       {path: 'record', component: RecordComponent},
       {path: 'medical-records', component: MedicalRecordsComponent,  children: [
+        {path: 'get-record', component: GetRecordComponent},
         {path: ':id', component: PatientRecordComponent},
       ]},
     ], canActivate: [RouterGuardService]

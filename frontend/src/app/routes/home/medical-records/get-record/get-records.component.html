@@ -1,0 +1,28 @@
+<div class="app-medicals-records-wrapper">
+
+  <form [formGroup]="searchRecordsForm">
+
+    <mat-form-field class="input-container">
+      <input matInput autofocus placeholder="SSD" name="ssd"
+             [formControlName]='"ssd"' type="text" required>
+      <mat-error *ngIf="searchRecordsForm.get('ssd').hasError('required')">
+        <strong>{{'SSD is required'}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+  </form>
+
+  <mat-input-container class="input-container" >
+    <input matInput autofocus placeholder="First name"  type="text">
+  </mat-input-container>
+  <br>
+
+  <mat-input-container class="input-container">
+    <input matInput autofocus placeholder="Last name" type="text">
+  </mat-input-container>
+  <br>
+
+  <button mat-button class="btn" (click)="getRecord()" [disabled]="searchRecordsForm.get('ssd').value.length < 10" > GET RECORD</button>
+
+</div>
