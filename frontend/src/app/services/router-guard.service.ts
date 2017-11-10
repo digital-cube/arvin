@@ -15,7 +15,6 @@ export class RouterGuardService implements CanActivate, CanActivateChild {
           if (!this.loggedUser.token) {
             this.loggedUser.login(r);
           }
-          this.router.navigate(['']);
           resolve(true);
         },
         err => {
