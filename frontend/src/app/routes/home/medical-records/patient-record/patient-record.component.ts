@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -8,6 +9,7 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class PatientRecordComponent implements OnInit{
+
   ngOnInit(){
     console.log('PATIENT RECORD');
   }
