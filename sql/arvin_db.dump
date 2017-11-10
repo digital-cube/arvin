@@ -31,8 +31,8 @@ CREATE TABLE `auth_users` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_auth_users_username` (`username`),
-  KEY `ix_auth_users_active` (`active`),
   KEY `ix_auth_users_role_flags` (`role_flags`),
+  KEY `ix_auth_users_active` (`active`),
   CONSTRAINT `CONSTRAINT_1` CHECK (`active` in (0,1))
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,6 +137,42 @@ CREATE TABLE `mail_queue` (
 LOCK TABLES `mail_queue` WRITE;
 /*!40000 ALTER TABLE `mail_queue` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mail_queue` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `medical_records`
+--
+
+DROP TABLE IF EXISTS `medical_records`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `medical_records` (
+  `id` char(10) NOT NULL,
+  `time_created` datetime NOT NULL,
+  `ssn` varchar(64) NOT NULL,
+  `enc_key` varchar(128) NOT NULL,
+  `record_path` varchar(256) NOT NULL,
+  `have_personal_data` tinyint(1) NOT NULL,
+  `have_admins_data` tinyint(1) NOT NULL,
+  `personal_data_files` text DEFAULT NULL,
+  `admins_data_files` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ix_medical_records_ssn` (`ssn`),
+  KEY `ix_medical_records_have_personal_data` (`have_personal_data`),
+  KEY `ix_medical_records_have_admins_data` (`have_admins_data`),
+  CONSTRAINT `medical_records_ibfk_1` FOREIGN KEY (`id`) REFERENCES `auth_users` (`id`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`have_personal_data` in (0,1)),
+  CONSTRAINT `CONSTRAINT_2` CHECK (`have_admins_data` in (0,1))
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `medical_records`
+--
+
+LOCK TABLES `medical_records` WRITE;
+/*!40000 ALTER TABLE `medical_records` DISABLE KEYS */;
+/*!40000 ALTER TABLE `medical_records` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -314,6 +350,8 @@ CREATE TABLE `users` (
   `id` char(10) NOT NULL,
   `first_name` varchar(64) DEFAULT NULL,
   `last_name` varchar(64) DEFAULT NULL,
+  `admin_id` varchar(64) DEFAULT NULL,
+  `user_picture` varchar(64) DEFAULT NULL,
   `data` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id`) REFERENCES `auth_users` (`id`)
@@ -338,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-10 15:55:44
+-- Dump completed on 2017-11-11  0:20:48

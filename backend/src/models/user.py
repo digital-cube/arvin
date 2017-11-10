@@ -34,7 +34,7 @@ class User(base.common.orm.sql_base):
     first_name = Column(String(64))
     last_name = Column(String(64))
     admin_id = Column(String(64))
-    user
+    user_picture = Column(String(64))
     data = Column(Text)
     auth_user = relationship("AuthUser", back_populates="user")
 
