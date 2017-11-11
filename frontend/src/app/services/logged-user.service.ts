@@ -11,6 +11,8 @@ export class LoggedUserService {
   username: string;
   firstName: string;
   lastName: string;
+  role: number;
+  picture: string;
 
   constructor(private http: Http) {
     this.token = localStorage.getItem('token');
@@ -43,6 +45,8 @@ export class LoggedUserService {
     this.username = response.username;
     this.firstName = response.first_name;
     this.lastName = response.last_name;
+    this.role = response.role;
+    this.picture = response.picture;
   }
 
   setToken(token) {

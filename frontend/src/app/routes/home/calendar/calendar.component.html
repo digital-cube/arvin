@@ -1,43 +1,39 @@
+<div class="app-card">
 
+  <div class="app-calendar-wrapper">
 
-<div class="app-calendar-wrapper">
+    <div class="app-calendar-header">
 
-  <div class="app-calendar-header">
+      <h3 class="app-month"> November 2017 </h3>
 
-    <h3 class="app-month"> November 2017 </h3>
+      <div>
+        <button mat-button> Day</button>
+        <button mat-button> Week</button>
+        <button mat-button> Month</button>
+        <button mat-button> Agenda</button>
+      </div>
 
-    <div>
-      <button mat-button> Day</button>
-      <button mat-button> Week</button>
-      <button mat-button> Month</button>
-      <button mat-button> Agenda</button>
+    </div>
+
+    <div class="app-calendar">
+      <table>
+        <thead>
+        <tr>
+          <th *ngFor="let d of days">
+            {{d}}
+          </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let w of calendar">
+          <td *ngFor="let d of w">
+            {{d.dayInMonth}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 
   </div>
-
-  <div class="app-calendar">
-    <table>
-      <thead>
-      <tr>
-        <th *ngFor="let d of days">
-          {{d}}
-        </th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr *ngFor="let w of calendar">
-        <td *ngFor="let d of w">
-          {{d.dayInMonth}}
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
 </div>
-
-
-
-
-

@@ -14,12 +14,12 @@
       <span matLine>Profile</span>
     </a>
 
-    <a mat-list-item routerLink="/record" (click)="closeSidemenu($event);">
+    <a mat-list-item *ngIf="particularlyLooged" routerLink="/record" (click)="closeSidemenu($event);">
       <mat-icon  mat-list-icon>content_paste</mat-icon>
       <span matLine>Personal record</span>
     </a>
 
-    <a mat-list-item routerLink="/medical-records" (click)="closeSidemenu($event);">
+    <a mat-list-item routerLink="/medical-records" *ngIf="!particularlyLooged" (click)="closeSidemenu($event);">
       <mat-icon  mat-list-icon>chrome_reader_mode</mat-icon>
       <span matLine>Medical records</span>
     </a>

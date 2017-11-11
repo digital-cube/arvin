@@ -1,7 +1,7 @@
 @import "../../../../assets/scss/_vars";
 
 .navbar {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12) !important;
+  //box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12) !important;
   height: 65px;
   width: 100%;
   z-index: 3;
@@ -10,6 +10,7 @@
 
 .menu-bar {
   background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12) !important;
   display: flex;
   justify-content: space-between;
   height: 65px;
@@ -17,7 +18,7 @@
   align-items: center;
   padding: 0 20px;
   position: fixed;
-  width: calc(100% - 285px);
+  width: calc(100% - 270px);
   z-index: 2;
   @media screen and (max-width: 768px) {
     width: calc(100% - 40px);
@@ -49,7 +50,7 @@
   align-items: center;
   position: relative;
   span {
-    color: grey;
+    color: $font-color;
     font-weight: 400;
     font-size: 14px;
   }
@@ -106,12 +107,12 @@
       font-weight: 500;
       margin-bottom: 8px;
       letter-spacing: .005em;
-      color: grey;
+      color: $font-color;
     }
     .logged-username {
       margin-bottom: 4px;
       font-size: 12px;
-      color: grey;
+      color: $font-color;
     }
   }
 }
@@ -156,7 +157,7 @@
     padding: 0 8px;
     width: 40px;
     mat-icon {
-      color: grey;
+      color: $gray;
     }
   }
   .my-menu {
@@ -185,7 +186,7 @@
 }
 
 .toggle-sidenav-button {
-  color: grey !important;
+  color: $gray !important;
   margin: 0 6px;
   height: 40px;
   min-width: 0;
@@ -206,6 +207,6 @@
 }
 
 i {
-  color: grey;
+  color: $gray;
   margin-right: 15px;
 }
