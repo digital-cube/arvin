@@ -6,3 +6,4 @@ redis==2.10.5
 SQLAlchemy==1.1.6
 tornado==4.5.2
 virtualenv==15.1.0
+#base==https://github.com/digital-cube/BASE

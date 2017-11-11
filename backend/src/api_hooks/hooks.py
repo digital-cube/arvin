@@ -111,6 +111,7 @@ def pack_user(user):
             ('dummy_pic.jpg' if user.role_flags & role.USER else 'dummy_pic2.jpg')
         if user.role_flags & role.ADMIN:
             _user['id_admin'] = _db_user.admin_id
+            _user['has_pin'] = _db_user.enc_key is not None
         if user.role_flags & role.USER:
             _user['have_data'] = arvin_common.have_record(user)
 

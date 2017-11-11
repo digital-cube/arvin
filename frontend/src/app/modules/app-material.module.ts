@@ -4,13 +4,13 @@ import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatGridListModule,
   MatIconModule, MatInputModule,
   MatListModule, MatMenuModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule, MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -34,7 +34,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatRadioModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class AppMaterialModule { }
