@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoggedUserService} from "../../../../services/logged-user.service";
 import * as moment from 'moment';
 import {timestamp} from "rxjs/operator/timestamp";
+import {LookupService} from "../../../../services/lookup.service";
 
 
 @Component({
@@ -44,6 +45,7 @@ resp = {
     ],
   "extern_records": [
     {
+      "record_id": "234234234_230067",
       "id_doctor": "s0d9fasdfj",
       "name_doctor": "pera zikic",
       "record_time_created":  "2017-08-22 09:15:20",
@@ -53,6 +55,7 @@ resp = {
       }
     },
     {
+      "record_id": "234234234_2346678",
       "id_doctor": "sdfsd08sdf",
       "name_doctor": "zika peric",
       "record_time_created":  "2017-09-22 19:15:20",
@@ -64,7 +67,11 @@ resp = {
     ]
 };
 
-showEditNewRecord = false;
+
+  tabIndex = false;
+  particularlyLooged; // kada je Dr
+
+  showEditButton = true;
 
   addRecordForm = new FormGroup({
     'title': new FormControl('', [Validators.required]),
@@ -73,10 +80,21 @@ showEditNewRecord = false;
 
   ngOnInit(){
     console.log('PATIENT RECORD');
+
+    if(this.lookup.roles.USER == this.loggedUser.role){
+      this.particularlyLooged = true;
+    } else {
+      this.particularlyLooged = false;
+    }
+    console.log('particularlyLooged', this.particularlyLooged);
+    console.log('tabIndex', this.tabIndex);
+
+
   }
 
   constructor(
     private loggedUser: LoggedUserService,
+    private lookup: LookupService,
   ) {
     this._sortResponse();
   }
@@ -101,20 +119,26 @@ showEditNewRecord = false;
     }
   }
 
-  onTabChange($event){
+  onTabChange(event){
     console.log(event);
+    if (event.index===0){
+      console.log('owner');
+      this.tabIndex = false;
+    } else {
+      this.tabIndex = true;
+    }
   }
 
   openEditNewRecord(){
-    this.showEditNewRecord = true;
+    this.showEditButton = false;
   }
 
   cancel(){
-    this.showEditNewRecord = false;
+    this.showEditButton = true;
   }
 
   addNewRecord(){
-    this.showEditNewRecord = false;
+    this.showEditButton = false;
     console.log('prover', this.addRecordForm);
     this.resp.own_record.unshift(
       {

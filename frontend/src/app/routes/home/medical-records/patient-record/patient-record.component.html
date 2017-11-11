@@ -30,15 +30,15 @@
         </mat-input-container>
         <br>
 
-        <div *ngIf="!showEditNewRecord" class="btn-add">
-          <button (click)="openEditNewRecord()" mat-button>
+        <div *ngIf="showEditButton" class="btn-add">
+          <button (click)="openEditNewRecord()" mat-button [disabled]="(!this.tabIndex && !this.particularlyLooged) || (this.tabIndex && this.particularlyLooged)">
             <mat-icon>add_circle_outline</mat-icon>
           </button>
         </div>
 
       </div>
 
-      <div *ngIf="showEditNewRecord" class="owner-record">
+      <div *ngIf="!showEditButton" class="owner-record">
         <h2 class="edit-title">Edit new record</h2>
         <form [formGroup]="addRecordForm">
           <div class="edit-owner-record-header">
@@ -62,7 +62,7 @@
       </div>
 
 
-      <mat-tab-group (selectChange)="onTabChange($event)" (selectedTabChange)="onTabChange($event)">
+      <mat-tab-group (selectedTabChange)="onTabChange($event)">
         <mat-tab class="tab-label" label="OWNER">
           <div class="owner-wrapper" *ngFor="let r of resp.own_record">
             <div class="owner-record" id="r.record_id">
@@ -81,15 +81,31 @@
           </div>
         </mat-tab>
         <mat-tab class="tab-label" label="DOCTOR">
-          <div class="table-wrapper">
-            <div class="scroll-table">
+          <div class="owner-wrapper" *ngFor="let r of resp.extern_records">
+            <div class="owner-record" id="r.record_id">
+              <div class="owner-record-header">
+                <h3 class="owner-record-title">{{r.record_data.title}}</h3>
+                <h3 class="owner-record-date">{{r.record_time_created}}</h3>
+              </div>
+              <div class="owner-record-description" >
+                <p>
+                  {{r.record_data.description}}
+                </p>
+
+              </div>
 
             </div>
           </div>
         </mat-tab>
       </mat-tab-group>
 
-
+      <!--"id_doctor": "s0d9fasdfj",-->
+      <!--"name_doctor": "pera zikic",-->
+      <!--"record_time_created":  "2017-08-22 09:15:20",-->
+      <!--"record_data": {-->
+      <!--"title": "fffffff ttt",-->
+      <!--"description": "alo bre, evo neki description"-->
+      <!--}-->
 
 
     </div>
