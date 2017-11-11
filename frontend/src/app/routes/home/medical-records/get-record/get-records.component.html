@@ -4,7 +4,7 @@
 
     <mat-form-field class="input-container">
       <input matInput autofocus placeholder="SSN" name="ssn" [maxlength]="16"
-             [formControlName]='"ssn"' type="number" required>
+             [formControlName]='"ssn"' type="text" required>
       <mat-error *ngIf="searchRecordsForm.get('ssn').hasError('required')">
         <strong>{{'SSN is required'}}</strong>
       </mat-error>
@@ -24,7 +24,6 @@
   <br>
 
   <button mat-raised-button class="btn" (click)="getRecord()" [disabled]="searchRecordsForm.get('ssn').value.toString().length !== 16" > GET RECORD</button>
-
 </div>
 
 <div *ngIf="!loggedUser.hasPin" class="app-medicals-records-wrapper">
