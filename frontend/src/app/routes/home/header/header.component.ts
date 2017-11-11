@@ -16,7 +16,7 @@ export class HeaderComponent {
   // lang_icon = `${environment.images_url}${this.tr_svc.lang.toLowerCase()}-${this.tr_svc.lang.toLocaleUpperCase()}.svg`;
   // environment = environment;
 
-  constructor(private apiSvc: ApiCallsService, private loggedUser: LoggedUserService, private router: Router, public ms: MediatorService) {
+  constructor(private apiSvc: ApiCallsService, public loggedUser: LoggedUserService, private router: Router, public ms: MediatorService) {
     console.log('HEADER', loggedUser);
   }
 

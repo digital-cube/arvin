@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit{
     console.log('PROFILE');
   }
 
-  constructor(private loggedUser: LoggedUserService,public dialog: MatDialog) {}
+  constructor(public loggedUser: LoggedUserService,public dialog: MatDialog) {}
 
   changePassword() {
     this.dialog.open(ChangePasswordDialogComponent, <MatDialogConfig>{
