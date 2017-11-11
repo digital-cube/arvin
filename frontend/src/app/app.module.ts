@@ -25,7 +25,6 @@ import {ProfileComponent} from "./routes/home/profile/profile.component";
 import {CalendarComponent} from "./routes/home/calendar/calendar.component";
 import {MedicalRecordsComponent} from "./routes/home/medical-records/medical-records.component";
 import {PatientRecordComponent} from "./routes/home/medical-records/patient-record/patient-record.component";
-import {RecordComponent} from "./routes/home/record/record.component";
 import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-records.component";
 
 @NgModule({
@@ -43,7 +42,6 @@ import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-r
     CalendarComponent,
     MedicalRecordsComponent,
     PatientRecordComponent,
-    RecordComponent,
     GetRecordComponent
 ],
   imports: [
