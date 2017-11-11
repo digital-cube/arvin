@@ -6,6 +6,7 @@ import json
 import uuid
 import io
 import tempfile
+import redis
 
 import base.common.orm
 from base.application.components import Base
@@ -26,6 +27,8 @@ from src.common.arvin_common import get_external_file
 from src.common.arvin_common import encode_data_file
 from src.common.arvin_common import generate_gpg_keys
 from src.config.arvin_config import enc_key_path
+from src.config.arvin_config import redis_ws_key
+from src.config.arvin_config import ws_channel
 
 
 @authenticated(role.USER)
@@ -268,6 +271,29 @@ class MedicalRecordsRequest(Base):
         mr = _q.one()
 
         _id_owner = mr.id
+
+        def send_to_socket(id_receiver, message):
+            id_receiver = 'u00000ovx0'
+            r = redis.Redis()
+            _msg = {
+                "channel": ws_channel.format(id_receiver),
+                "msg": message
+            }
+            _msg = json.dumps(_msg)
+            r.lpush(redis_ws_key, _msg)
+
+        _cmd = {
+            "cmd": "REQUEST_PERMISSION",
+            "doctor": {
+                "id": self.auth_user.id,
+                "picture": self.auth_user.user.user_picture,
+                "id_doctor": self.auth_user.user.admin_id,
+                "first_name": self.auth_user.user.first_name,
+                "last_name": self.auth_user.user.last_name
+            }
+        }
+
+        send_to_socket(_id_owner, _cmd)
 
         return self.ok()
 

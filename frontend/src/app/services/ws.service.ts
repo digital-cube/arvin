@@ -12,20 +12,25 @@ import {Injectable} from '@angular/core';
 // import autobahn = require("autobahn");
 import {Connection} from 'autobahn';
 import {LookupService} from './lookup.service';
+import {LoggedUserService} from "./logged-user.service";
 
 @Injectable()
 export class AppWsService {
   connection: any;
 
   constructor(
-    private lookup: LookupService
+    private lookup: LookupService,
+    private loggedUser: LoggedUserService,
   ) {
     // this.connection = new autobahn.Connection({url: environment.ws_url, realm: 'arvinws'});
     this.connection = new Connection({url: environment.ws_url, realm: 'arvinws'});
     this.connection.onopen = (session) => {
 
       console.log('CONNECTING', session);
-      session.subscribe(`arvin2user`, (args, kwargs) => {
+      const channel = `arvin2user_${this.loggedUser.id}`;
+      console.log('SUBSCRIBE TO', channel);
+      // session.subscribe(`arvin2user`, (args, kwargs) => {
+      session.subscribe(channel, (args, kwargs) => {
         console.log('STIGLO', args, kwargs);
         this.process_cmd(args, kwargs);
       }).then(
@@ -67,6 +72,7 @@ export class AppWsService {
 
   request_permissions(_doctor) {
     console.log('DOOOOOCTOR', _doctor);
+    alert('DOCTOR TRAZI PRISTUP')
   }
 
 

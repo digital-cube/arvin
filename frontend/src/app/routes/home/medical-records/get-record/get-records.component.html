@@ -3,9 +3,9 @@
   <form [formGroup]="searchRecordsForm">
 
     <mat-form-field class="input-container">
-      <input matInput autofocus placeholder="SSD" name="ssd" [maxlength]="10"
-             [formControlName]='"ssd"' type="number" required>
-      <mat-error *ngIf="searchRecordsForm.get('ssd').hasError('required')">
+      <input matInput autofocus placeholder="SSD" name="ssn" [maxlength]="16"
+             [formControlName]='"ssn"' type="number" required>
+      <mat-error *ngIf="searchRecordsForm.get('ssn').hasError('required')">
         <strong>{{'SSD is required'}}</strong>
       </mat-error>
     </mat-form-field>
@@ -23,7 +23,7 @@
   </mat-input-container>
   <br>
 
-  <button mat-raised-button class="btn" (click)="getRecord()" [disabled]="searchRecordsForm.get('ssd').value.toString().length < 10" > GET RECORD</button>
+  <button mat-raised-button class="btn" (click)="getRecord()" [disabled]="searchRecordsForm.get('ssn').value.toString().length !== 16" > GET RECORD</button>
 
 </div>
 
@@ -32,8 +32,8 @@
   <form [formGroup]="setPinForm">
 
     <mat-form-field class="input-container">
-      <input matInput autofocus placeholder="PIN" name="pin" [maxlength]="16"
-             [formControlName]='"pin"' type="number" required>
+      <input matInput autofocus placeholder="PIN" name="pin" [maxlength]="10"
+             [formControlName]='"pin"' type="text" required>
       <mat-error *ngIf="setPinForm.get('pin').hasError('required')">
         <strong>{{'PIN is required'}}</strong>
       </mat-error>
@@ -42,6 +42,6 @@
 
   </form>
 
-  <button mat-raised-button class="btn" (click)="setPin()" [disabled]="setPinForm.get('pin').value.toString().length < 16" > SET PIN</button>
+  <button mat-raised-button class="btn" (click)="setPin()" [disabled]="setPinForm.get('pin').value.length !== 10" > SET PIN</button>
 
 </div>

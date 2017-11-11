@@ -7,8 +7,9 @@ export class MediatorService {
 
 
   menuToggle = false;
-  closeOverlay: boolean = false;
-  closeMobileOverlay: boolean = false;
+  closeOverlay = false;
+  closeOverlay2 = false;
+  closeMobileOverlay = false;
   showLoader = false;
   screenHeight: number;
   openDropdownMenu = false;

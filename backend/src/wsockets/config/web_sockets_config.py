@@ -25,5 +25,5 @@ redis_block_timeout = 1
 ws_redis_channel = 'arvin2user'
 PREFIX = 'arvin'
 
-ws_messages_channel = ''
+ws_messages_channel = 'arvin2user'
 ws_messages_cmd = 'msg'
