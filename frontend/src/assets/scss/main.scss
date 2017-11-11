@@ -29,9 +29,9 @@ app-root {
     -ms-animation: fadein 2s; /* Internet Explorer */
     -o-animation: fadein 2s; /* Opera < 12.1 */
     animation: fadein 2s;
-    @media screen and (max-width: $app-max-mobile-header-view-width - 1px) {
-      padding: 0;
-    }
+    //@media screen and (max-width: $app-max-mobile-header-view-width - 1px) {
+    //  padding: 0;
+    //}
 }
 
 app-login, app-signup, app-forgot-password, app-reset-password {
@@ -66,12 +66,28 @@ app-login, app-signup, app-forgot-password, app-reset-password {
   }
 }
 
-.mat-radio-inner-circle {
+.mat-radio-inner-circle{
   background-color: $app_blue!important;
 }
 
-.mat-radio-ripple .mat-ripple-element {
+.mat-radio-ripple .mat-ripple-element{
   background-color: rgba($app_blue, 0.26)!important;
+}
+mat-checkbox {
+  //color: $app_blue;
+  //.mat-checkbox-background {
+  //  background-color: $app_blue;
+  //}
+    .mat-checkbox-checked & {
+      border-color: $app_blue!important;
+    }
+  &.mat-checkbox-focused{
+    background-color: $app_blue;
+  }
+
+    .mat-ink-ripple{
+      background-color: rgba($app_blue, .26);
+  }
 }
 mat-sidenav-content{
   margin:0!important;
@@ -113,4 +129,7 @@ app-login, app-forgot-password, app-signup{
       overflow: hidden !important;
     }
   }
+}
+.mat-dialog-container{
+ padding: 0!important;
 }

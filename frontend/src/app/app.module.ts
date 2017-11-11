@@ -1,3 +1,5 @@
+///<reference path="routes/dialogs/image-cropper/cropper.component.ts"/>
+///<reference path="routes/dialogs/change-password-dialog/change-password-dialog.component.ts"/>
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -26,6 +28,9 @@ import {CalendarComponent} from "./routes/home/calendar/calendar.component";
 import {MedicalRecordsComponent} from "./routes/home/medical-records/medical-records.component";
 import {PatientRecordComponent} from "./routes/home/medical-records/patient-record/patient-record.component";
 import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-records.component";
+import {CropperComponent} from "./routes/dialogs/image-cropper/cropper.component";
+import {ChangePasswordDialogComponent} from "./routes/dialogs/change-password-dialog/change-password-dialog.component";
+import {ImageCropperModule} from "ng2-img-cropper";
 
 @NgModule({
   declarations: [
@@ -42,8 +47,13 @@ import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-r
     CalendarComponent,
     MedicalRecordsComponent,
     PatientRecordComponent,
+    GetRecordComponent,
+    ChangePasswordDialogComponent,
+    CropperComponent
     GetRecordComponent
 ],
+  entryComponents: [ ChangePasswordDialogComponent, CropperComponent],
+
   imports: [
     HttpModule,
     BrowserModule,
@@ -52,7 +62,8 @@ import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-r
     ReactiveFormsModule,
     AppRouter,
     AppMaterialModule,
-    AvatarModule
+    AvatarModule,
+    ImageCropperModule
   ],
   providers: [
     LookupService,

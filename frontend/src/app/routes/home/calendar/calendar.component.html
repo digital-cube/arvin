@@ -6,7 +6,7 @@
 
       <h3 class="app-month"> November 2017 </h3>
 
-      <div>
+      <div class="agenda">
         <button mat-button> Day</button>
         <button mat-button> Week</button>
         <button mat-button> Month</button>
@@ -34,6 +34,21 @@
         </tbody>
       </table>
     </div>
+  </div>
 
+  <div class="mobile-calenadar-wrapper">
+    <!--<div class="day-in-mounth">-->
+      <!--<div *ngFor="let d of days">-->
+      <!--{{d}}-->
+
+      <!--</div>-->
+
+    <!--</div>-->
+    <div class="day" *ngFor="let w of calendar">
+      <div class="day-by-day" *ngFor="let d of w">
+        {{d.dayInMonth}}
+
+      </div>
+    </div>
   </div>
 </div>
