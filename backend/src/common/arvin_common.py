@@ -102,9 +102,10 @@ def get_gpg_key_file_path(key_path):
     return '{}/{}'.format(enc_key_path.format(key_path), enc_key_name)
 
 
-def generate_gpg_keys(username, password, key_path):
+def generate_gpg_keys(username, password, _data_path):
 
-    _key_file = get_gpg_key_file_path(key_path)
+    key_path = enc_key_path.format(_data_path)
+    _key_file = get_gpg_key_file_path(_data_path)
     # CREATE KEY
     gpg = gnupg.GPG(gnupghome=key_path)
     input_data = gpg.gen_key_input(
@@ -124,9 +125,11 @@ def generate_gpg_keys(username, password, key_path):
     return True
 
 
-def decode_data_file(encoded_file, password, auth_user, file_like_obj):
+def decode_data_file(encoded_file, password, auth_user, file_like_obj, key_path):
 
-    key_path = get_record_path(auth_user)
+    # print('PAAAAAAAAASWORD', type(password), password)
+    # file_like_obj='/home/bobane/hackatone/arvin/backend/drk.json'
+    # key_path = get_record_path(auth_user)
     gpg = gnupg.GPG(gnupghome=key_path)
     # DECRYPT FILE
     with open(encoded_file, 'rb') as ef:

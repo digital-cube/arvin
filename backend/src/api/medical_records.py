@@ -22,6 +22,7 @@ from src.common.arvin_common import get_record_path
 from src.common.arvin_common import make_record_path
 from src.common.arvin_common import decode_data_file
 from src.common.arvin_common import get_own_file
+from src.common.arvin_common import get_external_file
 from src.common.arvin_common import encode_data_file
 from src.common.arvin_common import generate_gpg_keys
 from src.config.arvin_config import enc_key_path
@@ -37,6 +38,40 @@ class MedicalRecord(Base):
     )
     def get(self, pin):
         """user get his own record"""
+
+        MR, _session = base.common.orm.get_orm_model('medical_records')
+        _q = _session.query(MR).filter(MR.id == self.auth_user.id)
+        if _q.count() != 1:
+            # TODO CONSIDER RETURN EMPTY OBJECT
+           return self.error(rmsgs.MEDICAL_RECORD_DO_NOT_EXISTS)
+
+        _mr = _q.one()
+
+        _decoded_pass = decrypt_enc_password(self.auth_user.user.enc_key, pin)
+        print('PAAAAAAAAASWORD', type(_decoded_pass), _decoded_pass)
+        if not _decoded_pass:
+            return self.error(rmsgs.PASSWORD_DECRYPTION_ERROR)
+
+        _own_data_file = get_own_file(self.auth_user)
+        _external_data_file = get_external_file(self.auth_user)
+
+        key_file = enc_key_path.format(self.auth_user.user.record_path)
+        _data = {}
+        if _mr.have_personal_data:
+            _file_like_obj = tempfile.NamedTemporaryFile()
+            # def decode_data_file(encoded_file, password, auth_user, file_like_obj):
+            _decripted_own_file_data = decode_data_file(_own_data_file, _decoded_pass, self.auth_user, _file_like_obj.name, key_file)
+            if not _decripted_own_file_data:
+                return self.error(rmsgs.FILE_DECODING_ERROR)
+            print('FILE', _file_like_obj)
+            _file_like_obj.seek(0)
+            print('FILE', _file_like_obj)
+            print('FILE', _file_like_obj.read())
+            _file_like_obj.seek(0)
+            for l in _file_like_obj:
+                print('LINE', l)
+
+
         return self.ok()
 
     @params(
@@ -52,6 +87,7 @@ class MedicalRecord(Base):
         MR, _session = base.common.orm.get_orm_model('medical_records')
 
         _uniq_pass = uuid.uuid1()
+        # print('PAAAAAAAAASWORD SET', type(_uniq_pass), _uniq_pass)
         _uniq_encrypted = crypt_enc_password(_uniq_pass, pin)
         if not _uniq_encrypted:
             return self.error(rmsgs.PASSWORD_ENCRYPTION_ERROR)
@@ -94,17 +130,19 @@ class MedicalRecord(Base):
         _mr = _q.one()
 
         _decoded_pass = decrypt_enc_password(self.auth_user.user.enc_key, pin)
+        # print('PAAAAAAAAASWORD', type(_decoded_pass), _decoded_pass)
         if not _decoded_pass:
             return self.error(rmsgs.PASSWORD_DECRYPTION_ERROR)
 
         _own_data_file = get_own_file(self.auth_user)
+        key_file = enc_key_path.format(self.auth_user.user.record_path)
         if _mr.have_personal_data:
             # get old data end calculate changes
 
             # TODO: user stream instead of file
             # _file_like_obj = io.BytesIO()
             _file_like_obj = tempfile.NamedTemporaryFile()
-            _decoded_own_data = decode_data_file(_own_data_file.name, _decoded_pass, _file_like_obj)
+            _decoded_own_data = decode_data_file(_own_data_file.name, _decoded_pass, _file_like_obj, key_file)
             if not _decoded_own_data:
                 return self.error(rmsgs.FILE_DECODING_ERROR)
 
@@ -116,8 +154,11 @@ class MedicalRecord(Base):
             # TODO: user stream instead of file
         # _file_like_input_obj = io.BytesIO(json.dumps(own_data))
         _file_like_input_obj = tempfile.NamedTemporaryFile()
-        key_file = enc_key_path.format(self.auth_user.user.record_path)
+        with open(_file_like_input_obj.name, 'w') as tf:
+            tf.write(json.dumps(own_data, ensure_ascii=False))
+        # _file_like_input_obj.write(json.dumps(own_data, ensure_ascii=False).encode('utf-8'))
         # def encode_data_file(file_like_object, recipient, encoded_file, auth_user):
+
         if not encode_data_file(_file_like_input_obj.name, self.auth_user.username, _own_data_file, key_file):
             return self.error(rmsgs.FILE_ENCODING_ERROR)
 
