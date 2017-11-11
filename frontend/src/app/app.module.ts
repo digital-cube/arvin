@@ -32,6 +32,8 @@ import {CropperComponent} from "./routes/dialogs/image-cropper/cropper.component
 import {ChangePasswordDialogComponent} from "./routes/dialogs/change-password-dialog/change-password-dialog.component";
 import {ImageCropperModule} from "ng2-img-cropper";
 import {RequestDialogComponent} from "./routes/dialogs/request-dialog/request-dialog.component";
+import {AppWsService} from "./services/ws.service";
+
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import {RequestDialogComponent} from "./routes/dialogs/request-dialog/request-di
     LoggedUserService,
     ApiCallsService,
     RouterGuardService,
-    MediatorService
+    MediatorService,
+    AppWsService
   ],
   bootstrap: [AppComponent]
 })

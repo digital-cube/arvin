@@ -11,6 +11,7 @@ PASSWORD_DECRYPTION_ERROR = 1007
 FILE_DECODING_ERROR = 1008
 FILE_ENCODING_ERROR = 1009
 GENERATE_KEYS_ERROR = 1010
+MEDICAL_RECORD_COULD_NOT_BE_FOUND = 1011
 
 lmap = {}
 lmap[ERROR] = 'Error'
@@ -24,6 +25,7 @@ lmap[PASSWORD_DECRYPTION_ERROR] = 'Password decryption error'
 lmap[FILE_DECODING_ERROR] = 'Error decode file'
 lmap[FILE_ENCODING_ERROR] = 'Error encode file'
 lmap[GENERATE_KEYS_ERROR] = 'Generate keys error'
+lmap[MEDICAL_RECORD_COULD_NOT_BE_FOUND] = 'Medical record could not be found'
 
 lrev = {}
 for k in lmap:

@@ -3,6 +3,7 @@
 
 import {Component} from '@angular/core';
 import {MediatorService} from "../../services/mediator";
+import {AppWsService} from "../../services/ws.service";
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import {MediatorService} from "../../services/mediator";
   styleUrls: ['home.component.scss']
 })
 export class HomeComponent {
-  constructor(public ms: MediatorService) {}
+  constructor(public ms: MediatorService, private ws: AppWsService) {}
 
   closeSideMenu(){
     this.ms.closeOverlay = false;
