@@ -135,6 +135,7 @@ resp = {
 
   cancel(){
     this.showEditButton = true;
+    this.setFormDefault();
   }
 
   addNewRecord(){
@@ -150,6 +151,14 @@ resp = {
         }
       }
     );
+    this.setFormDefault();
+  }
+
+  setFormDefault() {
+    this.addRecordForm.setValue({
+      'title': null,
+      'description': null
+    });
   }
 
 
