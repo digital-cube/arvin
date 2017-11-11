@@ -17,6 +17,7 @@ export class HeaderComponent {
   // environment = environment;
 
   constructor(private apiSvc: ApiCallsService, private loggedUser: LoggedUserService, private router: Router, public ms: MediatorService) {
+    console.log('HEADER', loggedUser);
   }
 
   // logoutUser() {

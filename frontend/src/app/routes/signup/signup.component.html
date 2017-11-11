@@ -16,7 +16,7 @@
         <input type="text" matInput [formControlName]="'last_name'" placeholder="last name"/>
       </mat-form-field>
       <mat-form-field>
-        <input type="text" matInput [formControlName]="'phone'" placeholder="telephone"/>
+        <input type="text" matInput [formControlName]="'ssn'" placeholder="social security number"/>
       </mat-form-field>
       <mat-radio-group class="role-group" [formControlName]="'role_flags'">
         <mat-radio-button class="role" *ngFor="let r of refObjectKeys(loginRoles)" value="{{loginRoles[r]}}">{{r.toLowerCase()}}
