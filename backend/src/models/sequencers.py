@@ -60,6 +60,17 @@ class s_hash_2_params(base.common.orm.sql_base):
         self.active_stage = active_stage
 
 
+class s_admins(base.common.orm.sql_base):
+    __tablename__ = 's_admins'
+
+    id = Column(CHAR(64), primary_key=True)
+    active_stage = Column(CHAR(3), index=True, nullable=False)
+
+    def __init__(self, _id, active_stage):
+        self.id = _id
+        self.active_stage = active_stage
+
+
 def main():
     import base.common.orm
     _session = base.common.orm.orm.session()
@@ -67,6 +78,7 @@ def main():
     for _s in [
         ('u', '00', '000', 4, 0, 'users', 'STR', 's_users', False),
         ('s', '00', '000', 58, 0, 'session_token', 'STR', 's_session_token', False),
+        ('a', '00', '000', 4, 0, 'admins', 'STR', 's_admins', False),
         ('h', '00', '000', 58, 0, 'hash_2_params', 'STR', 's_hash_2_params', False)]:
         _seq = Sequencer(*_s)
 
