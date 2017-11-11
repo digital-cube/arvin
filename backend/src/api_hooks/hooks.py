@@ -52,7 +52,7 @@ class RedisTokenizer
 """
 
 hooks = [
-    # 'pack_user',
+    'pack_user',
     'check_password_is_valid',
     # 'register_user',
     # 'pre_register_user',
@@ -65,7 +65,7 @@ hooks = [
     # 'save_mail_queue',
     # 'pre_logout_process',
     # 'post_logout_process',
-    # 'check_user',
+    'check_user',
     # 'get_mail_from_queue',
     # 'forgot_password',
     # 'Tokenizer',
@@ -73,7 +73,58 @@ hooks = [
     # 'RedisTokenizer',
 ]
 
+import src.lookup.user_roles as role
+
 
 def check_password_is_valid(password):
     return True
+
+
+def pack_user(user):
+    """
+    Prepare user's data
+    :param user: orm Auth_user
+    :return: dict with user's data
+    """
+    _user = {}
+    _user['id'] = user.id
+    _user['username'] = user.username
+    _user['role'] = user.role_flags
+
+    import base.common.orm
+    User, _session = base.common.orm.get_orm_model('users')
+
+    _q = _session.query(User).filter(User.id == user.id)
+
+    if _q.count() == 1:
+        _db_user = _q.one()
+
+        _user['first_name'] = _db_user.first_name
+        _user['last_name'] = _db_user.last_name
+        _user['picture'] = _db_user.user_picture if \
+            _db_user.user_picture is not None else \
+            ('dummy_pic.jpg' if user.role_flags & role.USER else 'dummy_pic2.jpg')
+        if user.role_flags & role.ADMIN:
+            _user['id_admin'] = _db_user.admin_id
+
+    return _user
+
+
+def check_user(auth_user):
+    """
+    Check logged user and return it's data.
+    On error raise CheckUserError exception
+    :param auth_user:
+    :return: dict with user's data
+    """
+
+    # res = {
+    #     'id': auth_user.id,
+    #     'username': auth_user.username,
+    #     'first_name': auth_user.user.first_name,
+    #     'last_name': auth_user.user.last_name
+    # }
+
+    return pack_user(auth_user)
+
 
