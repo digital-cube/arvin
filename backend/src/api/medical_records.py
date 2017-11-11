@@ -65,14 +65,25 @@ class MedicalRecord(Base):
                 return self.error(rmsgs.FILE_DECODING_ERROR)
             print('FILE', _file_like_obj)
             _file_like_obj.seek(0)
-            print('FILE', _file_like_obj)
-            print('FILE', _file_like_obj.read())
-            _file_like_obj.seek(0)
-            for l in _file_like_obj:
-                print('LINE', l)
+            _own_data_from_file = _file_like_obj.read()
+            _own_data_from_file = json.loads(_own_data_from_file.decode('utf-8'))
 
+            _data = {
+                'main': {
+                    'weight': _own_data_from_file['weight'],
+                    'height': _own_data_from_file['height'],
+                    'systolic_blood_pressure': _own_data_from_file['systolic_blood_pressure'],
+                    'diastolic_blood_pressure': _own_data_from_file['diastolic_blood_pressure'],
+                    'blood_type': _own_data_from_file['blood_type']},
+                'own_record': _own_data_from_file['own_data']}
 
-        return self.ok()
+            # print('FILE', _file_like_obj)
+            # print('FILE', _file_like_obj.read())
+            # _file_like_obj.seek(0)
+            # for l in _file_like_obj:
+            #     print('LINE', l)
+
+        return self.ok(_data)
 
     @params(
         {'name': 'pin', 'type': str, 'required': True, 'doc': 'user\'s pin'},
@@ -134,6 +145,14 @@ class MedicalRecord(Base):
         if not _decoded_pass:
             return self.error(rmsgs.PASSWORD_DECRYPTION_ERROR)
 
+        _own_data_for_file = {
+            'weight': weight,
+            'height': height,
+            'systolic_blood_pressure': systolic_blood_pressure,
+            'diastolic_blood_pressure': diastolic_blood_pressure,
+            'blood_type': blood_type,
+            'own_data': own_data}
+
         _own_data_file = get_own_file(self.auth_user)
         key_file = enc_key_path.format(self.auth_user.user.record_path)
         if _mr.have_personal_data:
@@ -155,7 +174,7 @@ class MedicalRecord(Base):
         # _file_like_input_obj = io.BytesIO(json.dumps(own_data))
         _file_like_input_obj = tempfile.NamedTemporaryFile()
         with open(_file_like_input_obj.name, 'w') as tf:
-            tf.write(json.dumps(own_data, ensure_ascii=False))
+            tf.write(json.dumps(_own_data_for_file, ensure_ascii=False))
         # _file_like_input_obj.write(json.dumps(own_data, ensure_ascii=False).encode('utf-8'))
         # def encode_data_file(file_like_object, recipient, encoded_file, auth_user):
 

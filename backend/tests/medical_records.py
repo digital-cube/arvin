@@ -221,4 +221,11 @@ class TestMedicalRecords(TestBase):
 
         res = self.fetch('/api/medical-record?pin={}'.format(_pin), method='GET', headers=headers)
         print('RES', res)
-        self.assertEqual(res.code, 204)
+        self.assertEqual(res.code, 200)
+
+        res = res.body.decode('utf-8')
+        res = json.loads(res)
+
+        self.assertIn('main', res)
+        self.assertIn('own_record', res)
+        # self.assertEqual(res['m'], msgs.lmap[msgs.UNAUTHORIZED_REQUEST])
