@@ -1,15 +1,23 @@
 # coding= utf-8
 
+import datetime
+import decimal
+import json
+import uuid
+
+import base.common.orm
 from base.application.components import Base
 from base.application.components import api
 from base.application.components import params
 from base.application.components import authenticated
 
-import datetime
-import decimal
-import json
-
 from src.lookup import user_roles as role
+from src.lookup import response_messages as rmsgs
+from src.common.arvin_common import have_record
+from src.common.arvin_common import crypt_enc_password
+from src.common.arvin_common import decrypt_enc_password
+from src.common.arvin_common import get_record_path
+from src.common.arvin_common import make_record_path
 
 
 @authenticated(role.USER)
@@ -26,14 +34,47 @@ class MedicalRecord(Base):
 
     @params(
         {'name': 'pin', 'type': str, 'required': True, 'doc': 'user\'s pin'},
+        {'name': 'ssn', 'type': str, 'required': True, 'doc': 'user\'s ssn'},
         {'name': 'weight', 'type': float, 'required': False, 'doc': 'user\'s weight'},
         {'name': 'height', 'type': float, 'required': False, 'doc': 'user\'s height'},
         {'name': 'systolic_blood_pressure', 'type': int, 'required': False, 'doc': 'systolic blood pressure'},
         {'name': 'diastolic_blood_pressure', 'type': int, 'required': False, 'doc': 'diastolic blood pressure'},
         {'name': 'blood_type', 'type': str, 'required': False, 'doc': 'blood_type'},
     )
-    def put(self, pin, weight, height, systolic_blood_pressure, diastolic_blood_pressure, blood_type):
+    def put(self, pin, ssn, weight, height, systolic_blood_pressure, diastolic_blood_pressure, blood_type):
         """user create medical record"""
+
+        if have_record(self.auth_user):
+            return self._update_record()
+
+        return self._save_record(pin, ssn, weight, height, systolic_blood_pressure, diastolic_blood_pressure, blood_type)
+
+    def _save_record(self, pin, ssn, weight, height, systolic_blood_pressure, diastolic_blood_pressure, blood_type):
+
+        MR, _session = base.common.orm.get_orm_model('medical_records')
+
+    # def __init__(self, _id, ssn, enc_key, record_path):
+
+        _uniq_pass = uuid.uuid1()
+        _uniq_encrypted = crypt_enc_password(_uniq_pass, pin)
+        if not _uniq_encrypted:
+            return self.error(rmsgs.PASSWORD_ENCRYPTION_ERROR)
+
+        _record_path = get_record_path(self.auth_user)
+        if not _record_path:
+            return self.error(rmsgs.GENERATE_RECORD_PATH_ERROR)
+        if not make_record_path(_record_path):
+            return self.error(rmsgs.CREATE_RECORD_PATH_ERROR)
+
+        mr = MR(self.auth_user.id, ssn, _uniq_encrypted, _record_path)
+        _session.add(mr)
+        _session.commit()
+
+        return self.ok()
+
+    def _update_record(self):
+
+        MR, _session = base.common.orm.get_orm_model('medical_records')
         return self.ok()
 
     @params(

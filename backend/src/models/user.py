@@ -38,12 +38,13 @@ class User(base.common.orm.sql_base):
     data = Column(Text)
     auth_user = relationship("AuthUser", back_populates="user")
 
-    def __init__(self, id_user, first_name, last_name, data):
+    def __init__(self, id_user, first_name, last_name, data, admin_id=None):
 
         self.id = id_user
         self.first_name = first_name
         self.last_name = last_name
         self.data = data
+        self.admin_id = admin_id
 
 
 class MedicalRecords(base.common.orm.sql_base):
@@ -61,9 +62,16 @@ class MedicalRecords(base.common.orm.sql_base):
     personal_data_files = Column(Text, nullable=True)
     admins_data_files = Column(Text, nullable=True)
 
+    def __init__(self, _id, ssn, enc_key, record_path):
+        self.id = _id
+        self.ssn = ssn
+        self.enc_key = enc_key
+        self.record_path = record_path
+
 
 def main():
     pass
+
 
 if __name__ == '__main__':
 

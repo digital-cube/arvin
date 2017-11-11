@@ -9,8 +9,60 @@ from base.application.lookup import responses
 
 class TestMedicalRecords(TestBase):
 
-    def test_user_save_record(self):
-        self.assertTrue(True)
+    def test_user_open_medical_record(self):
+
+        self._register('doctor@test.loc', '123',
+                       {"first_name": "doctor", "last_name": "test", "phone": "+234234", "role_flags": "2"})
+        _doc_token = self.token
+
+        self._register('user@test.loc', '123',
+                       {"first_name": "user", "last_name": "test", "phone": "+234234", "role_flags": "1"})
+
+        _user_token = self.token
+
+        headers = {'Authorization': _user_token}
+
+        _body = {
+            'pin': '1234567890',
+            'ssn': '1234567890212',
+            'weight': 100.0,
+            'height': 185.6,
+            'systolic_blood_pressure': 120,
+            'diastolic_blood_pressure': 80,
+            'blood_type': 'A+',
+        }
+        _body = json.dumps(_body)
+
+        res = self.fetch('/api/medical-record', method='PUT', body=_body, headers=headers)
+        print('RES', res)
+        self.assertEqual(res.code, 204)
+
+    def test_password_pin_encryption(self):
+
+        passes = [
+            'ff1be51a-c680-11e7-8be7-b88a60581a29',
+            'ff1bf5aa-c680-11e7-8be7-b88a60581a29',
+            'ff1bfdc0-c680-11e7-8be7-b88a60581a29',
+            'ff1c01bc-c680-11e7-8be7-b88a60581a29',
+            'ff1c03f6-c680-11e7-8be7-b88a60581a29',
+            'ff1c05fe-c680-11e7-8be7-b88a60581a29',
+            'ff1c07e8-c680-11e7-8be7-b88a60581a29',
+            'ff1c09d2-c680-11e7-8be7-b88a60581a29',
+            'ff1c0bbc-c680-11e7-8be7-b88a60581a29',
+            'ff1c0db0-c680-11e7-8be7-b88a60581a29'
+        ]
+        pin = '1234123498'
+        from src.common.arvin_common import crypt_enc_password
+        from src.common.arvin_common import decrypt_enc_password
+
+        for p in passes:
+
+            _encrypted_pass = crypt_enc_password(p, pin)
+            self.assertTrue(_encrypted_pass)
+            _decrypted_pass = decrypt_enc_password(_encrypted_pass, pin)
+            self.assertTrue(_decrypted_pass)
+            self.assertEqual(p, _decrypted_pass)
+
 
     # def test_get_unauthorized(self):
     #
