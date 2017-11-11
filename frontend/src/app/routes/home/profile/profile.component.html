@@ -1,1 +1,28 @@
-PROFILE
+<div class="user-info-container">
+  <mat-card>
+    <div class="user-info">
+      <div class="profile-wrapper">
+        <div class="profile">
+          <ngx-avatar class="profile-img" src="assets/images/avatar.png" size="80" bgColor="#039BE6" [round]="true"></ngx-avatar>
+          <button mat-mini-fab class="edit">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+        </div>
+        <button class="change-pswd-btn" mat-button  type="button">Change Password</button>
+      </div>
+      <div class="user-data">
+        <h1 class="user-name">{{loggedUser.firstName}} {{loggedUser.lastName}}</h1>
+        <div class="user-data-column">
+          <div class="user-data-row">
+            <span class="user-caption">First Name</span>
+            <span class="user-text">{{loggedUser.firstName}}</span>
+            <span class="user-caption">Last Name</span>
+            <span class="user-text">{{loggedUser.lastName}}</span>
+            <span class="user-caption">Email</span>
+            <span class="user-text">{{loggedUser.username}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

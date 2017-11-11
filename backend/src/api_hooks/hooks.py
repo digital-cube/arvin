@@ -73,7 +73,12 @@ hooks = [
     # 'RedisTokenizer',
 ]
 
+import json
+
+from base.application.api_hooks.api_hooks import format_password
+
 import src.lookup.user_roles as role
+from src.common import arvin_common
 
 
 def check_password_is_valid(password):
@@ -106,6 +111,8 @@ def pack_user(user):
             ('dummy_pic.jpg' if user.role_flags & role.USER else 'dummy_pic2.jpg')
         if user.role_flags & role.ADMIN:
             _user['id_admin'] = _db_user.admin_id
+        if user.role_flags & role.USER:
+            _user['have_data'] = arvin_common.have_record(user)
 
     return _user
 
@@ -127,4 +134,42 @@ def check_user(auth_user):
 
     return pack_user(auth_user)
 
+
+def register_user(id_user, username, password, data):
+    """
+    Save user into database
+    :param id_user: database user id
+    :param username: user's username
+    :param password: user's password
+    :param data: user's data
+    :return: bool success
+    """
+    import base.common.orm
+    from base.common.utils import log
+    AuthUser, _session = base.common.orm.get_orm_model('auth_users')
+    User, _ = base.common.orm.get_orm_model('users')
+
+    password = format_password(username, password)
+
+    import base.application.lookup.user_roles as user_roles
+    role_flags = int(data['role_flags']) if 'role_flags' in data else user_roles.USER
+
+    if role_flags not in user_roles.lmap:
+        log.critical('Wrong role type: {}'.format(role_flags))
+        return 'Wrong user role type {}'.format(role_flags)
+
+    _auth_user = AuthUser(id_user, username, password, role_flags, True)
+    _session.add(_auth_user)
+    _session.commit()
+
+    first_name = data['first_name'] if 'first_name' in data else None
+    last_name = data['last_name'] if 'last_name' in data else None
+    from base.common.sequencer import sequencer
+    admin_id = sequencer().new('a') if role_flags & role.ADMIN else None
+    _data = json.dumps(data)
+    _user = User(id_user, first_name, last_name, _data, admin_id)
+    _session.add(_user)
+    _session.commit()
+
+    return True
 

@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
       'role_flags': new FormControl(`${this.lookup.roles.USER}`),
       'first_name': new FormControl('', Validators.required),
       'last_name': new FormControl('', Validators.required),
-      'phone': new FormControl('', Validators.required)
+      'ssn': new FormControl('', Validators.required)
     }),
   });
   refObjectKeys = Object.keys;
@@ -70,12 +70,13 @@ export class SignupComponent implements OnInit {
         'role_flags': `${this.lookup.roles.USER}`,
         'first_name': '',
         'last_name': '',
-        'phone':''
+        'ssn':''
       }
     });
   }
 
   signUp() {
+    //noinspection JSAnnotator
     delete this.apiError;
     this.apiSvc.svcPost('/user/register', this.signUpForm.value).subscribe(
       this.userRegistered.bind(this),

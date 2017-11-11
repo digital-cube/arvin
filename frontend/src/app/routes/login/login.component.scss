@@ -7,6 +7,10 @@
   align-items: center;
   justify-content: baseline;
   flex-direction: column;
+  left:-20%;
+  @media screen and (max-width: 768px) {
+    left: inherit;
+  }
   .logo {
     background-image: url("../../../assets/images/arvin-logo.jpg");
     background-position: center center;

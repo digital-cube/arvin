@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {LoggedUserService} from "../../../services/logged-user.service";
 
 
 @Component({
@@ -12,6 +13,6 @@ export class ProfileComponent implements OnInit{
     console.log('PROFILE');
   }
 
-  constructor() {}
+  constructor(private loggedUser: LoggedUserService) {}
 
 }

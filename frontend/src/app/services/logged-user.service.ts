@@ -11,6 +11,8 @@ export class LoggedUserService {
   username: string;
   firstName: string;
   lastName: string;
+  role: number;
+  picture: string;
 
   constructor(private http: Http) {
     this.token = localStorage.getItem('token');
@@ -30,16 +32,21 @@ export class LoggedUserService {
   }
 
   removeToken() {
+    //noinspection JSAnnotator
     delete this.token;
     localStorage.removeItem('token');
   }
 
   login(response) {
-    this.setToken(response.token);
+    if (response.token){
+      this.setToken(response.token);
+    }
     this.id = response.id;
     this.username = response.username;
     this.firstName = response.first_name;
     this.lastName = response.last_name;
+    this.role = response.role;
+    this.picture = response.picture;
   }
 
   setToken(token) {
