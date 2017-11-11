@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
+import {LoggedUserService} from "../../../../services/logged-user.service";
 
 
 @Component({
@@ -14,6 +15,8 @@ export class PatientRecordComponent implements OnInit{
     console.log('PATIENT RECORD');
   }
 
-  constructor() {}
+  constructor(
+    private loggedUser: LoggedUserService,
+  ) {}
 
 }
