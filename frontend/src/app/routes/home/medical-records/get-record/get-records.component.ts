@@ -16,6 +16,10 @@ export class GetRecordComponent implements OnInit{
     'ssd': new FormControl('', [Validators.required]),
   });
 
+  setPinForm = new FormGroup({
+    'pin': new FormControl('', [Validators.required]),
+  });
+
 
   ngOnInit(){
     console.log('MEDICAL RECORDS');
@@ -23,7 +27,7 @@ export class GetRecordComponent implements OnInit{
 
   constructor(
     private api_service: ApiCallsService,
-    private loggedUser: LoggedUserService,
+    public loggedUser: LoggedUserService,
   ) {}
 
   getRecord(){
@@ -37,6 +41,10 @@ export class GetRecordComponent implements OnInit{
     //   }
     // );
 
+  }
+
+  setPin(){
+    console.log('FORM', this.setPinForm);
   }
 
 }

@@ -1,0 +1,106 @@
+@import "../../../../assets/scss/_vars";
+
+
+.user-info-container{
+  padding: 24px;
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
+  //@media screen and (max-width: 416px) {
+  //  padding: 0;
+  //}
+}
+
+.profile-wrapper{
+  //width: 20%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-width: 175px;
+  .profile{
+    border-radius: 50%;
+    width: 80px;
+    height: auto;
+    margin-bottom: 24px;
+    position: relative;
+    -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  }
+  .profile-img {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+  }
+  .edit{
+    position: absolute;
+    right: -11px;
+    bottom: -11px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 40px;
+    background-color: $button-blue;
+  }
+  .change-pswd-btn{
+    min-height: 36px;
+    min-width: 88px;
+    line-height: 36px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+  }
+}
+
+.user-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+.user-data {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  h1{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    padding-bottom: 30px;
+  }
+}
+.user-data-column {
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+  .user-data-row {
+    padding-right: 24px;
+    display: flex;
+    flex-direction: column;
+    float: left;
+
+    .user-caption {
+      margin-bottom: 2px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.54);
+    }
+
+    .user-text {
+      min-height: 24px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: .01em;
+      line-height: 24px;
+    }
+
+  }
+}

@@ -76,6 +76,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
+    //noinspection JSAnnotator
     delete this.apiError;
     this.apiSvc.svcPost('/user/register', this.signUpForm.value).subscribe(
       this.userRegistered.bind(this),
