@@ -1,10 +1,10 @@
-<div class="app-medicals-records-wrapper">
+<div *ngIf="loggedUser.hasPin" class="app-medicals-records-wrapper">
 
   <form [formGroup]="searchRecordsForm">
 
     <mat-form-field class="input-container">
-      <input matInput autofocus placeholder="SSD" name="ssd"
-             [formControlName]='"ssd"' type="text" required>
+      <input matInput autofocus placeholder="SSD" name="ssd" [maxlength]="10"
+             [formControlName]='"ssd"' type="number" required>
       <mat-error *ngIf="searchRecordsForm.get('ssd').hasError('required')">
         <strong>{{'SSD is required'}}</strong>
       </mat-error>
@@ -23,6 +23,25 @@
   </mat-input-container>
   <br>
 
-  <button mat-button class="btn" (click)="getRecord()" [disabled]="searchRecordsForm.get('ssd').value.length < 10" > GET RECORD</button>
+  <button mat-raised-button class="btn" (click)="getRecord()" [disabled]="searchRecordsForm.get('ssd').value.toString().length < 10" > GET RECORD</button>
+
+</div>
+
+<div *ngIf="!loggedUser.hasPin" class="app-medicals-records-wrapper">
+
+  <form [formGroup]="setPinForm">
+
+    <mat-form-field class="input-container">
+      <input matInput autofocus placeholder="PIN" name="pin" [maxlength]="16"
+             [formControlName]='"pin"' type="number" required>
+      <mat-error *ngIf="setPinForm.get('pin').hasError('required')">
+        <strong>{{'PIN is required'}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+  </form>
+
+  <button mat-raised-button class="btn" (click)="setPin()" [disabled]="setPinForm.get('pin').value.toString().length < 16" > SET PIN</button>
 
 </div>

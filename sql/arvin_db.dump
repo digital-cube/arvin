@@ -150,8 +150,6 @@ CREATE TABLE `medical_records` (
   `id` char(10) NOT NULL,
   `time_created` datetime NOT NULL,
   `ssn` varchar(64) NOT NULL,
-  `enc_key` varchar(128) NOT NULL,
-  `record_path` varchar(256) NOT NULL,
   `have_personal_data` tinyint(1) NOT NULL,
   `have_admins_data` tinyint(1) NOT NULL,
   `personal_data_files` text DEFAULT NULL,
@@ -199,6 +197,30 @@ LOCK TABLES `options` WRITE;
 /*!40000 ALTER TABLE `options` DISABLE KEYS */;
 INSERT INTO `options` VALUES (1,'version','0.0.1');
 /*!40000 ALTER TABLE `options` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `s_admins`
+--
+
+DROP TABLE IF EXISTS `s_admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `s_admins` (
+  `id` char(64) NOT NULL,
+  `active_stage` char(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_s_admins_active_stage` (`active_stage`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `s_admins`
+--
+
+LOCK TABLES `s_admins` WRITE;
+/*!40000 ALTER TABLE `s_admins` DISABLE KEYS */;
+/*!40000 ALTER TABLE `s_admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -303,7 +325,7 @@ CREATE TABLE `sequencer` (
 
 LOCK TABLES `sequencer` WRITE;
 /*!40000 ALTER TABLE `sequencer` DISABLE KEYS */;
-INSERT INTO `sequencer` VALUES ('h','00',58,'000',0,'hash_2_params','STR','s_hash_2_params',0),('s','00',58,'000',0,'session_token','STR','s_session_token',0),('u','00',4,'000',0,'users','STR','s_users',0);
+INSERT INTO `sequencer` VALUES ('a','00',4,'000',0,'admins','STR','s_admins',0),('h','00',58,'000',0,'hash_2_params','STR','s_hash_2_params',0),('s','00',58,'000',0,'session_token','STR','s_session_token',0),('u','00',4,'000',0,'users','STR','s_users',0);
 /*!40000 ALTER TABLE `sequencer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,6 +375,8 @@ CREATE TABLE `users` (
   `admin_id` varchar(64) DEFAULT NULL,
   `user_picture` varchar(64) DEFAULT NULL,
   `data` text DEFAULT NULL,
+  `enc_key` varchar(128) DEFAULT NULL,
+  `record_path` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id`) REFERENCES `auth_users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -376,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-11  0:20:48
+-- Dump completed on 2017-11-11  7:00:31
