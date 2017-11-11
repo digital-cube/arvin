@@ -62,3 +62,9 @@ app-login, app-signup, app-forgot-password, app-reset-password {
 .mat-radio-ripple .mat-ripple-element {
   background-color: rgba($app_blue, 0.26)!important;
 }
+mat-sidenav-content{
+  margin:0!important;
+}
+.mat-list-item-content{
+  padding: 0!important;
+}

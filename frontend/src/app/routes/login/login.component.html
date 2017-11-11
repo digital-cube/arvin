@@ -12,6 +12,9 @@
       <a class="forgot-link" routerLink="/forgot-password">Forgot password?</a>
     </div>
     <button type="submit" class="md-raised login-btn" mat-button [disabled]="loginForm.invalid">Login</button>
+    <div class="signup-link-wrapper">
+      <a class="forgot-link" routerLink="/sign-up">Sign Up</a>
+    </div>
   </form>
   <mat-card-footer>
     <div *ngIf="apiError" class="error-msg" [@errorAnimate]>

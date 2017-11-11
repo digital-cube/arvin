@@ -1,2 +1,25 @@
 
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-sidenav-fab-container"
+                       [ngClass]="{'move-left': ms.menuToggle, 'no-scroll': (ms.menuToggle || ms.closeMobileOverlay)}">
+  <!--<div class="spiner-wrapper" [hidden]="!ms.showLoader">-->
+  <!--<mat-spinner class="loader" [strokeWidth]="5"></mat-spinner>-->
+  <!--</div>-->
+  <div class="mobile-overlay" *ngIf="ms.closeOverlay" (click)="ms.toggle_sidenav(); closeSideMenu();"></div>
+  <mat-sidenav class="side-menu" [ngClass]="{'untoggled': ms.menuToggle, 'hide-sidemenu': !ms.menuToggle}" #sidenav
+               mode="side" opened="true">
+    <app-side-menu></app-side-menu>
+  </mat-sidenav>
+  <app-header></app-header>
+
+
+  <router-outlet></router-outlet>
+</mat-sidenav-container>
+
+
+
+
+
+
+
+
+

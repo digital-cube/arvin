@@ -17,6 +17,10 @@ import {ApiCallsService} from './services/api-calls.service';
 import {DashboardComponent} from './routes/home/dashboard/dashboard.component';
 import {RouterGuardService} from './services/router-guard.service';
 import {ResetPasswordComponent} from './routes/reset-password/reset-password.component';
+import {HeaderComponent} from "./routes/home/header/header.component";
+import {SideMenuComponent} from "./routes/home/side-menu/side-menu.component";
+import {MediatorService} from "./services/mediator";
+import {AvatarModule} from "ngx-avatar";
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import {ResetPasswordComponent} from './routes/reset-password/reset-password.com
     SignupComponent,
     ForgotPasswordComponent,
     DashboardComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    HeaderComponent,
+    SideMenuComponent
 ],
   imports: [
     HttpModule,
@@ -35,13 +41,15 @@ import {ResetPasswordComponent} from './routes/reset-password/reset-password.com
     FormsModule,
     ReactiveFormsModule,
     AppRouter,
-    AppMaterialModule
+    AppMaterialModule,
+    AvatarModule
   ],
   providers: [
     LookupService,
     LoggedUserService,
     ApiCallsService,
-    RouterGuardService
+    RouterGuardService,
+    MediatorService
   ],
   bootstrap: [AppComponent]
 })
