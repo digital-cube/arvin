@@ -1,32 +1,108 @@
-<div class="app-patient-record-wrapper">
+<mat-card class="app-card">
 
-  <div class="app-user-view">
+  <div class="app-patient-record-wrapper">
 
-    <mat-tab-group (selectChange)="onTabChange($event)" (selectedTabChange)="onTabChange($event)">
-      <mat-tab class="tab-label" label="PATIENT">
-        <div class="table-wrapper">
-          <div class="scroll-table">
+    <div class="app-user-view">
 
-          </div>
+      <div class="app-main-data">
+        <mat-input-container class="input-container" >
+          <input matInput autofocus placeholder="weight [Kg]"  value={{resp.main.weight}} type="number">
+        </mat-input-container>
+        <br>
+
+        <mat-input-container class="input-container" >
+          <input matInput autofocus placeholder="height [cm]" value={{resp.main.height}} type="number">
+        </mat-input-container>
+        <br>
+
+        <mat-input-container class="input-container" >
+          <input matInput autofocus placeholder="systolic blood pressure [mmHg]" value={{resp.main.systolic_blood_pressure}}  type="number">
+        </mat-input-container>
+        <br>
+
+        <mat-input-container class="input-container" >
+          <input matInput autofocus placeholder="diastolic blood pressure [mmHg]" value={{resp.main.diastolic_blood_pressure}} type="number">
+        </mat-input-container>
+        <br>
+
+        <mat-input-container class="input-container" >
+          <input matInput autofocus placeholder="blood type " value={{resp.main.blood_type}} type="text">
+        </mat-input-container>
+        <br>
+
+        <div *ngIf="!showEditNewRecord" class="btn-add">
+          <button (click)="openEditNewRecord()" mat-button>
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
         </div>
-      </mat-tab>
-      <mat-tab class="tab-label" label="DOCTOR">
-        <div class="table-wrapper">
-          <div class="scroll-table">
 
+      </div>
+
+      <div *ngIf="showEditNewRecord" class="owner-record">
+        <h2 class="edit-title">Edit new record</h2>
+        <form [formGroup]="addRecordForm">
+          <div class="edit-owner-record-header">
+            <mat-input-container class="input-container" >
+              <input matInput autofocus placeholder="title" type="text" [formControlName]='"title"'>
+            </mat-input-container>
           </div>
+          <div class="owner-record-description" >
+            <textarea class="textarea-owner-edit-record" [formControlName]='"description"'>Description...</textarea>
+          </div>
+
+        </form>
+
+        <div class="edit-btn-wrapper">
+          <button class="app-add-btn" mat-button (click)="addNewRecord()">ADD RECORD
+          </button>
+          <button class="app-add-btn" mat-button (click)="cancel()">CANCEL
+          </button>
         </div>
-      </mat-tab>
-    </mat-tab-group>
+
+      </div>
+
+
+      <mat-tab-group (selectChange)="onTabChange($event)" (selectedTabChange)="onTabChange($event)">
+        <mat-tab class="tab-label" label="OWNER">
+          <div class="owner-wrapper" *ngFor="let r of resp.own_record">
+            <div class="owner-record" id="r.record_id">
+              <div class="owner-record-header">
+                <h3 class="owner-record-title">{{r.record_data.title}}</h3>
+                <h3 class="owner-record-date">{{r.record_time_created}}</h3>
+              </div>
+              <div class="owner-record-description" >
+                <p>
+                  {{r.record_data.description}}
+                </p>
+
+              </div>
+
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab class="tab-label" label="DOCTOR">
+          <div class="table-wrapper">
+            <div class="scroll-table">
+
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+
+
+
+    </div>
+
+
 
 
 
 
   </div>
 
+</mat-card>
 
 
 
 
-
-</div>

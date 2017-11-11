@@ -1,0 +1,77 @@
+
+.app-card{
+  margin: 20px;
+
+  .app-main-data{
+    display: flex;
+    flex-wrap: wrap;
+
+    .input-container{
+      margin-right: 20px;
+      //padding: 10px 0;
+      width: 200px;
+    }
+    .btn-add{
+      //display: flex;
+      width: 200px;
+      margin: 0 auto;
+
+    }
+  }
+
+
+
+  .owner-record{
+    .edit-title{
+      margin: 30px 0 15px 0;
+    }
+    .edit-owner-record-header{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .textarea-owner-edit-record{
+      width: 100%;
+      font-size: 14px;
+    }
+    .edit-btn-wrapper{
+      margin-bottom: 20px;
+      text-align: right;
+    }
+  }
+
+
+
+
+  .app-add-btn{
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 12px;
+    margin: 12px 16px;
+  }
+
+  .owner-wrapper{
+    .owner-record{
+      margin: 15px 0 30px 0;
+      .owner-record-header{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .owner-record-title{
+          margin: 10px;
+        }
+        .owner-record-date{
+          margin: 10px;
+        }
+      }
+      .owner-record-description{
+        width: 300px;
+        margin: 10px;
+      }
+
+    }
+  }
+
+}
+
+
