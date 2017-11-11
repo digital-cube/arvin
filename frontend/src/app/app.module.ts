@@ -17,13 +17,16 @@ import {ApiCallsService} from './services/api-calls.service';
 import {DashboardComponent} from './routes/home/dashboard/dashboard.component';
 import {RouterGuardService} from './services/router-guard.service';
 import {ResetPasswordComponent} from './routes/reset-password/reset-password.component';
+import {HeaderComponent} from "./routes/home/header/header.component";
+import {SideMenuComponent} from "./routes/home/side-menu/side-menu.component";
+import {MediatorService} from "./services/mediator";
+import {AvatarModule} from "ngx-avatar";
 import {ProfileComponent} from "./routes/home/profile/profile.component";
 import {CalendarComponent} from "./routes/home/calendar/calendar.component";
 import {MedicalRecordsComponent} from "./routes/home/medical-records/medical-records.component";
 import {PatientRecordComponent} from "./routes/home/medical-records/patient-record/patient-record.component";
 import {RecordComponent} from "./routes/home/record/record.component";
 import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-records.component";
-
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-r
     ForgotPasswordComponent,
     DashboardComponent,
     ResetPasswordComponent,
+    HeaderComponent,
+    SideMenuComponent,
     ProfileComponent,
     CalendarComponent,
     MedicalRecordsComponent,
@@ -48,13 +53,15 @@ import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-r
     FormsModule,
     ReactiveFormsModule,
     AppRouter,
-    AppMaterialModule
+    AppMaterialModule,
+    AvatarModule
   ],
   providers: [
     LookupService,
     LoggedUserService,
     ApiCallsService,
-    RouterGuardService
+    RouterGuardService,
+    MediatorService
   ],
   bootstrap: [AppComponent]
 })
