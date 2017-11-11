@@ -12,4 +12,13 @@ h1{
   -ms-animation: fadein 2s; /* Internet Explorer */
   -o-animation: fadein 2s; /* Opera < 12.1 */
   animation: fadein 2s;
+  @media screen and (max-width: 768px) {
+    font-size: 56px;
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 36px;
+  }
+  @media screen and (max-width: 380px) {
+    font-size: 24px;
+  }
 }

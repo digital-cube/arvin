@@ -1,0 +1,16 @@
+<div class="cropper-wrapper">
+  <mat-card class="cropper-card">
+    <mat-card-header>
+      <mat-card-title class="cropper-title">Change Profile Image</mat-card-title>
+      <mat-icon (click)="CloseCropper()" class="close-btn">close</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+    <img-cropper [image]="imgData" [settings]="cropperSettings"></img-cropper>
+    <!--<img class="cropped-img" [src]="imgData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">-->
+    <mat-card-actions>
+      <button mat-button (click)="CloseCropper()">Cancel</button>
+      <button mat-button (click)="sendImage()">Change</button>
+    </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>
