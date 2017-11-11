@@ -49,7 +49,7 @@ import {ImageCropperModule} from "ng2-img-cropper";
     PatientRecordComponent,
     GetRecordComponent,
     ChangePasswordDialogComponent,
-    CropperComponent
+    CropperComponent,
     GetRecordComponent
 ],
   entryComponents: [ ChangePasswordDialogComponent, CropperComponent],

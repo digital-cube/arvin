@@ -14,6 +14,7 @@ export class LoggedUserService {
   role: number;
   picture: string;
   hasPin = false;
+  ssn: string;
 
   constructor(private http: Http) {
     this.token = localStorage.getItem('token');
@@ -49,6 +50,7 @@ export class LoggedUserService {
     this.role = response.role;
     this.picture = response.picture;
     // this.hasPin = response.hasPin;
+    this.ssn = response.ssn;
   }
 
   setToken(token) {
