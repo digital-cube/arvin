@@ -1,0 +1,21 @@
+
+<div class="app-dialog" >
+  <div class="app-dialog-header">
+    <h3 class="app-dialog-title">Request for Authorisation</h3>
+    <mat-icon (click)=cancel() class="close-btn app-close-btn">close</mat-icon>
+  </div>
+  <div class="app-dialog-content">
+   <div class="doctor-img"></div>
+    <h3 class="dr_name">Dr Mario Rossi</h3>
+
+      <div class="app-dialog-action">
+        <!--<button class="btn" [disabled]="changePasswordForm.get('old_password').hasError('required') || changePasswordForm.get('new_password').hasError('required')" mat-button type="submit" (click)="change()" >Change</button>-->
+        <button class="btn" color="primary" mat-raised-button>One Day</button>
+        <button class="btn" color="primary" mat-raised-button>One Week</button>
+        <button class="btn" color="primary" mat-raised-button>One Month</button>
+        <button class="btn more-top" color="warn" mat-raised-button>No</button>
+      </div>
+
+    </div>
+
+</div>

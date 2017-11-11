@@ -13,7 +13,7 @@ export class LoggedUserService {
   lastName: string;
   role: number;
   picture: string;
-  hasPin = false;
+  hasPin = true;
   ssn: string;
 
   constructor(private http: Http) {

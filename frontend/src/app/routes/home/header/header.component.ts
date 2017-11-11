@@ -5,6 +5,8 @@ import {environment} from '../../../../environments/environment';
 import {MediatorService} from "../../../services/mediator";
 import {ApiCallsService} from "../../../services/api-calls.service";
 import {LoggedUserService} from "../../../services/logged-user.service";
+import {MatDialog, MatDialogConfig} from "@angular/material";
+import {RequestDialogComponent} from "../../dialogs/request-dialog/request-dialog.component";
 
 @Component({
   selector: 'app-header',
@@ -16,7 +18,7 @@ export class HeaderComponent {
   // lang_icon = `${environment.images_url}${this.tr_svc.lang.toLowerCase()}-${this.tr_svc.lang.toLocaleUpperCase()}.svg`;
   // environment = environment;
 
-  constructor(private apiSvc: ApiCallsService, private loggedUser: LoggedUserService, private router: Router, public ms: MediatorService) {
+  constructor(private apiSvc: ApiCallsService, private loggedUser: LoggedUserService, private router: Router, public ms: MediatorService,public dialog: MatDialog) {
     console.log('HEADER', loggedUser);
   }
 
@@ -55,5 +57,9 @@ export class HeaderComponent {
         console.log('Error logout user', err);
       }
     );
+  }
+  openRequest(){
+    this.dialog.open(RequestDialogComponent, <MatDialogConfig>{
+    });
   }
 }
