@@ -20,6 +20,7 @@ export class MediatorService {
   openMobileSearch = false;
   showSearch = false;
   showDateRange = false;
+  id_doctor: string;
 
   constructor() {
     if (this.screenWidth < 416) {

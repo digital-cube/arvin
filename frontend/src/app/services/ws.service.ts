@@ -12,7 +12,11 @@ import {Injectable} from '@angular/core';
 // import autobahn = require("autobahn");
 import {Connection} from 'autobahn';
 import {LookupService} from './lookup.service';
-import {LoggedUserService} from "./logged-user.service";
+import {LoggedUserService} from './logged-user.service';
+import {RequestDialogComponent} from '../routes/dialogs/request-dialog/request-dialog.component';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MediatorService} from "./mediator";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AppWsService {
@@ -21,6 +25,10 @@ export class AppWsService {
   constructor(
     private lookup: LookupService,
     private loggedUser: LoggedUserService,
+    // private rdc: RequestDialogComponent,
+    public dialog: MatDialog,
+    private ms: MediatorService,
+    private router: Router
   ) {
     // this.connection = new autobahn.Connection({url: environment.ws_url, realm: 'arvinws'});
     this.connection = new Connection({url: environment.ws_url, realm: 'arvinws'});
@@ -65,14 +73,33 @@ export class AppWsService {
             }
             this.request_permissions(_cmd['doctor']);
             break;
+          case this.lookup.ws_commands.PERMISSION_ANSWER:
+            if (!('answer' in _cmd)) {
+              alert('WARNING!!! Missing answer');
+              break;
+            }
+            this.permission_aswer(_cmd['answer']);
+            break;
         }
       }
     }
   }
 
+  permission_aswer(answer) {
+      // alert('ANSWARE', answer);
+      this.ms.showLoader = false;
+      if (answer) {
+        this.router.navigate(['medical-records', 'u000asdfx']);
+      }
+  }
+
   request_permissions(_doctor) {
     console.log('DOOOOOCTOR', _doctor);
-    alert('DOCTOR TRAZI PRISTUP')
+    // alert('DOCTOR TRAZI PRISTUP');
+    this.ms.id_doctor = _doctor.id;
+
+    this.dialog.open(RequestDialogComponent, <MatDialogConfig>{
+    });
   }
 
 

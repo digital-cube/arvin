@@ -31,6 +31,55 @@ from src.config.arvin_config import redis_ws_key
 from src.config.arvin_config import ws_channel
 
 
+def send_to_socket(id_receiver, message):
+    # id_receiver = 'u00000ovx0'
+    r = redis.Redis()
+    _msg = {
+        "channel": ws_channel.format(id_receiver),
+        "msg": message
+    }
+    _msg = json.dumps(_msg)
+    r.lpush(redis_ws_key, _msg)
+
+
+@authenticated(role.USER)
+@api(
+    URI='/access-request-answer'
+)
+class AccessAnswer(Base):
+    @params(
+        {'name': 'answer', 'type': bool, 'required': True, 'doc': 'user\'s pin'},
+        {'name': 'id_doctor', 'type': str, 'required': True, 'doc': 'user\'s pin'},
+    )
+    def put(self, answare, id_doctor):
+        """answer to request"""
+
+        _cmd = {
+            "cmd": "PERMISSION_ANSWER",
+            "answer": answare
+        }
+
+        send_to_socket(id_doctor, _cmd)
+
+        return self.ok()
+
+
+        # MR, _session = base.common.orm.get_orm_model('medical_records')
+        # _q = _session.query(MR).filter(MR.id == self.auth_user.id)
+        # if _q.count() != 1:
+        #     # TODO CONSIDER RETURN EMPTY OBJECT
+        #    return self.error(rmsgs.MEDICAL_RECORD_DO_NOT_EXISTS)
+        #
+        # _mr = _q.one()
+        #
+        # _decoded_pass = decrypt_enc_password(self.auth_user.user.enc_key, pin)
+        # print('PAAAAAAAAASWORD', type(_decoded_pass), _decoded_pass)
+        # if not _decoded_pass:
+        #     return self.error(rmsgs.PASSWORD_DECRYPTION_ERROR)
+
+
+
+
 @authenticated(role.USER)
 @api(
     URI='/medical-record'
@@ -271,16 +320,6 @@ class MedicalRecordsRequest(Base):
         mr = _q.one()
 
         _id_owner = mr.id
-
-        def send_to_socket(id_receiver, message):
-            id_receiver = 'u00000ovx0'
-            r = redis.Redis()
-            _msg = {
-                "channel": ws_channel.format(id_receiver),
-                "msg": message
-            }
-            _msg = json.dumps(_msg)
-            r.lpush(redis_ws_key, _msg)
 
         _cmd = {
             "cmd": "REQUEST_PERMISSION",

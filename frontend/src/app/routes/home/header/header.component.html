@@ -11,14 +11,14 @@
       <!--<button mat-raised-button (click)="openRequest()">Logout</button>-->
 
       <button class="avatar-button" mat-icon-button [matMenuTriggerFor]="usermenu">
-        <ngx-avatar class="profile-img"  src="assets/images/profile_user.jpg"
+        <ngx-avatar class="profile-img"  src="{{loggedUser.picture}}"
                     size="45" bgColor="#039BE6" [round]="true"></ngx-avatar>
       </button>
 
       <mat-menu #usermenu="matMenu" [overlapTrigger]="false" class="user-menu">
         <div class="logged-user-data">
           <div class="user-img">
-            <ngx-avatar class="profile-img" src="assets/images/avatar.png"
+            <ngx-avatar class="profile-img" src="{{loggedUser.picture}}"
                         size="60" bgColor="#039BE6" [round]="true"></ngx-avatar>
           </div>
           <div class="logged-user-info">

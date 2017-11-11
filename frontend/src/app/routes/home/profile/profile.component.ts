@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit{
       },
     });
   }
-  openCropper(){
+  openCropper() {
     this.dialog.open(CropperComponent, <MatDialogConfig>{
     });
   }

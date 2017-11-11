@@ -11,7 +11,7 @@ export class LookupService {
 
   ws_commands = {
     'REQUEST_PERMISSION': 'REQUEST_PERMISSION',
-    'RISK_STATUS': 'RISK_STATUS'
+    'PERMISSION_ANSWER': 'PERMISSION_ANSWER'
   };
 
   constructor() { }

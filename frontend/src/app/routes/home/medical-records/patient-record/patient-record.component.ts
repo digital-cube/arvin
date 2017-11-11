@@ -47,21 +47,21 @@ resp = {
     {
       "record_id": "234234234_230067",
       "id_doctor": "s0d9fasdfj",
-      "name_doctor": "pera zikic",
+      "name_doctor": "Dr. Paolo Perri",
       "record_time_created":  "2017-08-22 09:15:20",
       "record_data": {
-        "title": "xxxxx",
-        "description": "dlfgsdiufgas;uodf"
+        "title": "Blood analysis",
+        "description": "WBC: 4.0, RBC: 4.96, Hemoglobin 15.7"
       }
     },
     {
       "record_id": "234234234_2346678",
       "id_doctor": "sdfsd08sdf",
-      "name_doctor": "zika peric",
+      "name_doctor": "Dr Mario Rossi",
       "record_time_created":  "2017-09-22 19:15:20",
       "record_data": {
-        "title": "auuuuu",
-        "description": "odje pozega, javi se, tu tu"
+        "title": "allergy testing",
+        "description": "Comprehensive: psitive, Regional: negative"
       }
     }
     ]

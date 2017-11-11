@@ -10,10 +10,10 @@
 
       <div class="app-dialog-action">
         <!--<button class="btn" [disabled]="changePasswordForm.get('old_password').hasError('required') || changePasswordForm.get('new_password').hasError('required')" mat-button type="submit" (click)="change()" >Change</button>-->
-        <button class="btn" color="primary" mat-raised-button>One Day</button>
-        <button class="btn" color="primary" mat-raised-button>One Week</button>
-        <button class="btn" color="primary" mat-raised-button>One Month</button>
-        <button class="btn more-top" color="warn" mat-raised-button>No</button>
+        <button class="btn" color="primary" mat-raised-button (click)="answare(true)">One Day</button>
+        <button class="btn" color="primary" mat-raised-button (click)="answare(true)">One Week</button>
+        <button class="btn" color="primary" mat-raised-button (click)="answare(true)">One Month</button>
+        <button class="btn more-top" color="warn" mat-raised-button (click)="answare(false)">No</button>
       </div>
 
     </div>

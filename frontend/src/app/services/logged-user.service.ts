@@ -13,6 +13,7 @@ export class LoggedUserService {
   lastName: string;
   role: number;
   picture: string;
+  other_picture: string;
   hasPin = true;
   ssn: string;
   admin_pin: string;
@@ -49,7 +50,9 @@ export class LoggedUserService {
     this.firstName = response.first_name;
     this.lastName = response.last_name;
     this.role = response.role;
-    this.picture = response.picture;
+    // this.picture = response.picture;
+    this.picture = this.role === 2 ? '/assets/images/profile_dr.png' : '/assets/images/profile_user.jpg';
+    this.other_picture = this.role === 1 ? '/assets/images/profile_dr.png' : '/assets/images/profile_user.jpg';
     this.hasPin = response.has_pin;
     this.ssn = response.ssn;
   }

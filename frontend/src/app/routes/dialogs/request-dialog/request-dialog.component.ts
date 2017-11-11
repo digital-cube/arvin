@@ -1,6 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {LoggedUserService} from "../../../services/logged-user.service";
+import {ApiCallsService} from "../../../services/api-calls.service";
+import {MediatorService} from "../../../services/mediator";
+// import {FormControl, FormGroup, Validators} from '@angular/forms';
 // import {ChosenUserService} from '../../../../utils/chosen-user.service';
 // import {TranslationService} from '../../../../utils/translate.service';
 // import {RequestsService} from '../../../../utils/requests.service';
@@ -15,7 +18,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['request-dialog.component.scss'],
 })
 
-export class RequestDialogComponent implements OnInit {
+export class RequestDialogComponent {
 
   // showPassword = false;
   //
@@ -37,13 +40,33 @@ export class RequestDialogComponent implements OnInit {
   constructor(
                public dialogRef: MatDialogRef<RequestDialogComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any,
+               private loggedUser: LoggedUserService,
+               private api_service: ApiCallsService,
+               private ms: MediatorService
   ) {}
-
-  ngOnInit() {
-  }
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  answare(res) {
+    console.log('RES', res);
+    const _url = '/api/access-request-answer';
+    const _data = {
+      answer: res,
+      id_doctor: this.ms.id_doctor
+    };
+    this.api_service.svcPut(_url, _data, this.loggedUser.getToken()).subscribe(
+      r => {
+        console.log('Response', r);
+        this.dialogRef.close();
+      },
+      r => {
+        console.log('ERROR', r);
+        this.dialogRef.close();
+      }
+    );
+
   }
 
 }
