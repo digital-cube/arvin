@@ -1,0 +1,137 @@
+@import "../../../assets/scss/vars";
+
+.example-sidenav-fab-container {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  z-index: 3;
+  position: relative;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding-left: 230px;
+  @media screen and (max-width: 768px) {
+    padding-left: 0;
+    background-color: white!important;
+  }
+  &::after {
+    content: "";
+    background: url("../../../assets/images/arvin-logo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+}
+.move-left{
+  padding-left: 230px;
+  @media screen and (max-width: 768px) {
+    padding-left: 0;
+  }
+}
+.mobile-overlay{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  background-color: rgba(0,0,0,0.4);
+  transition: all 0.3s ease-in-out;
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
+}
+.side-menu{
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12)!important;
+  will-change: width;
+  transition: all 0.3s;
+  z-index: 4!important;
+  box-sizing: border-box;
+  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  background-color: white;
+  width: 230px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  @media screen and (max-width: $app-max-mobile-width) {
+    min-width: 0;
+    width: 0;
+    padding: 16px 0;
+  }
+}
+
+mat-nav-list {
+  mat-icon {
+    color: $gray;
+  }
+  span{
+    color: $gray;
+  }
+}
+
+.untoggled{
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  @media screen and (max-width: 768px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 420px) {
+    width: calc(100% - 50px);
+  }
+}
+.nav-right-menu{
+  margin-right: 30px;
+
+  .profile-img{
+    height: 40px;
+    width: 40px;
+  }
+
+  mat-icon{
+    color: $gray;
+  }
+}
+
+i {
+  color: $gray;
+  margin-right: 15px;
+}
+.spiner-wrapper{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 2;
+  -webkit-animation: fadeout 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadeout 2s; /* Firefox < 16 */
+  -ms-animation: fadeout 2s; /* Internet Explorer */
+  -o-animation: fadeout 2s; /* Opera < 12.1 */
+  animation: fadeout 2s;
+  .loader{
+    position: absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+
+.sidebar {
+  transition: all .3s;
+}

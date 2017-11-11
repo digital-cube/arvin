@@ -1,0 +1,41 @@
+<nav class="navbar header-menu">
+  <div class="menu-bar">
+
+    <button class="toggle-sidenav-button-mobile" mat-icon-button
+            (click)="ms.toggle_sidenav(); ms.closeOverlay = true">
+      <mat-icon *ngIf="ms.menuToggle">menu</mat-icon>
+      <mat-icon *ngIf="!ms.menuToggle">menu</mat-icon>
+    </button>
+
+    <div class="nav-right-menu">
+      <!--<button mat-raised-button (click)="logout()">Logout</button>-->
+
+      <button class="avatar-button" mat-icon-button [matMenuTriggerFor]="usermenu" >
+        <ngx-avatar class="profile-img"  src="assets/images/avatar.png"
+                    size="45" bgColor="#039BE6" [round]="true"></ngx-avatar>
+      </button>
+      <mat-menu #usermenu="matMenu" [overlapTrigger]="false" class="user-menu">
+        <div class="logged-user-data">
+          <div class="user-img">
+            <ngx-avatar class="profile-img" src="assets/images/avatar.png"
+                        size="60" bgColor="#039BE6" [round]="true"></ngx-avatar>
+          </div>
+          <div class="logged-user-info">
+            <span class="logged-user-name">{{loggedUser.firstName}} {{loggedUser.lastName}}</span>
+            <span class="logged-username">{{loggedUser.username}}</span>
+          </div>
+        </div>
+        <hr>
+        <button class="profile-button" mat-menu-item routerLink="/profile">
+          <mat-icon class="material-icons">face</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button class="profile-button" mat-menu-item (click)="logout()">
+          <mat-icon class="material-icons">exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</nav>
+

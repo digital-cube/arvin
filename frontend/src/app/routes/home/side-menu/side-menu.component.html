@@ -1,0 +1,39 @@
+<div class="home-logo">
+  <!--<img src="../../../../assets/images/arvin-logo.jpg">-->
+  <h2>ARVIN</h2>
+</div>
+<hr>
+
+
+<div class="side-bar-content-container"
+     [ngClass]="{'close-content': !ms.menuToggle, 'hide-content': ms.openDropdownMenu}">
+
+  <mat-nav-list>
+    <a mat-list-item  routerLink="/profile" (click)="closeSidemenu($event);">
+      <mat-icon mat-list-icon>face</mat-icon>
+      <span matLine>Profile</span>
+    </a>
+
+    <a mat-list-item routerLink="/record" (click)="closeSidemenu($event);">
+      <mat-icon  mat-list-icon>content_paste</mat-icon>
+      <span matLine>Personal record</span>
+    </a>
+
+    <a mat-list-item routerLink="/medical-records" (click)="closeSidemenu($event);">
+      <mat-icon  mat-list-icon>chrome_reader_mode</mat-icon>
+      <span matLine>Medical records</span>
+    </a>
+
+    <a mat-list-item  routerLink="/calendar" (click)="closeSidemenu($event)">
+      <mat-icon mat-list-icon>event_note</mat-icon>
+      <span matLine>Calendar</span>
+    </a>
+
+    <a mat-list-item  routerLink="/" (click)="closeSidemenu($event)">
+
+      <mat-icon mat-list-icon>list</mat-icon>
+      <span matLine>Access list</span>
+    </a>
+
+  </mat-nav-list>
+</div>

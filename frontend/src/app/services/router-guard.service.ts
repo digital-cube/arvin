@@ -12,9 +12,9 @@ export class RouterGuardService implements CanActivate, CanActivateChild {
     return new Promise((resolve) => {
       this.loggedUser.checkUser().map( r => r.json() ).subscribe(
         r => {
-          if (!this.loggedUser.token) {
+          // if (!this.loggedUser.token) {
             this.loggedUser.login(r);
-          }
+          // }
           resolve(true);
         },
         err => {

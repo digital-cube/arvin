@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiCallsService} from '../../../services/api-calls.service';
 import {LoggedUserService} from '../../../services/logged-user.service';
+import {MediatorService} from "../../../services/mediator";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,7 @@ import {LoggedUserService} from '../../../services/logged-user.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private apiSvc: ApiCallsService, private loggedUser: LoggedUserService, private router: Router) { }
+  constructor(private apiSvc: ApiCallsService, private loggedUser: LoggedUserService, private router: Router, public ms: MediatorService) { }
 
   ngOnInit() {
     console.log('DASHOARD');

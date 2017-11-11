@@ -30,12 +30,15 @@ export class LoggedUserService {
   }
 
   removeToken() {
+    //noinspection JSAnnotator
     delete this.token;
     localStorage.removeItem('token');
   }
 
   login(response) {
-    this.setToken(response.token);
+    if (response.token){
+      this.setToken(response.token);
+    }
     this.id = response.id;
     this.username = response.username;
     this.firstName = response.first_name;

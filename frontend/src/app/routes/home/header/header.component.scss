@@ -1,0 +1,211 @@
+@import "../../../../assets/scss/_vars";
+
+.navbar {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12) !important;
+  height: 65px;
+  width: 100%;
+  z-index: 3;
+  position: relative;
+}
+
+.menu-bar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  height: 65px;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  width: calc(100% - 285px);
+  z-index: 2;
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 40px);
+  }
+}
+
+.home-heading {
+  font-size: 20px;
+  font-weight: 500;
+  color: #FF3D00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-logo {
+  padding-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-menu {
+  min-width: 256px;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  position: relative;
+  span {
+    color: grey;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+
+.logged-user-data {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  .user-img {
+    margin-right: 24px;
+    position: relative;
+    height: auto;
+    width: 60px;
+    border-radius: 50%;
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+
+    img {
+      height: auto;
+      width: 60px;
+      border-radius: 50%;
+    }
+    .change-image-sign {
+      z-index: 1;
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+      border-radius: 0;
+    }
+    .change-image-sign-text {
+      color: rgba(255, 255, 255, 0.84);
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      font-size: 9px;
+      z-index: 2;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .logged-user-info {
+    display: flex;
+    flex-direction: column;
+
+    .logged-user-name {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      letter-spacing: .005em;
+      color: grey;
+    }
+    .logged-username {
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: grey;
+    }
+  }
+}
+
+.menu-bar {
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  height: 65px;
+  flex-direction: row;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    justify-content: space-between;
+  }
+}
+
+.nav-right-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
+  .mat-menu {
+    display: inline-block;
+    padding: 0;
+    position: relative;
+  }
+
+  .language-button {
+    margin: 0 6px;
+    height: 40px;
+    min-width: 0;
+    line-height: 24px;
+    padding: 0 8px;
+    width: 40px;
+  }
+  .super-admin-menu {
+    margin: 0 6px;
+    height: 40px;
+    min-width: 0;
+    line-height: 24px;
+    padding: 0 8px;
+    width: 40px;
+    mat-icon {
+      color: grey;
+    }
+  }
+  .my-menu {
+    display: inline-block;
+    padding: 0;
+    position: relative;
+  }
+  .avatar-button {
+    height: 61px;
+    line-height: 61px;
+    width: 61px;
+    margin: 0 6px;
+    min-width: 0;
+    padding: 0 8px;
+    ngx-avatar .avatar-container, img {
+      -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+      -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+    }
+  }
+  .profile-img {
+    height: auto;
+    width: 45px;
+    border-radius: 50%;
+  }
+}
+
+.toggle-sidenav-button {
+  color: grey !important;
+  margin: 0 6px;
+  height: 40px;
+  min-width: 0;
+  line-height: 24px;
+  padding: 0 8px;
+  width: 40px;
+  border-radius: 50%;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.toggle-sidenav-button-mobile {
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+}
+
+i {
+  color: grey;
+  margin-right: 15px;
+}

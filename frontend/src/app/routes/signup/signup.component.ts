@@ -5,10 +5,30 @@ import {Router} from '@angular/router';
 import {LookupService} from '../../services/lookup.service';
 import {ApiCallsService} from '../../services/api-calls.service';
 import {LoggedUserService} from '../../services/logged-user.service';
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
+  animations: [
+    trigger(
+      'errorAnimate',
+      [
+        transition(
+          ':enter', [
+            style({ opacity: 0}),
+            animate('500ms', style({'opacity': 1}))
+          ]
+        ),
+        transition(
+          ':leave', [
+            style({'opacity': 1}),
+            animate('500ms', style({'opacity': 0}))
+
+          ]
+        )]
+    )
+  ],
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
@@ -22,7 +42,7 @@ export class SignupComponent implements OnInit {
       'role_flags': new FormControl(`${this.lookup.roles.USER}`),
       'first_name': new FormControl('', Validators.required),
       'last_name': new FormControl('', Validators.required),
-      'phone': new FormControl('', Validators.required)
+      'ssn': new FormControl('', Validators.required)
     }),
   });
   refObjectKeys = Object.keys;
@@ -37,7 +57,7 @@ export class SignupComponent implements OnInit {
     private router: Router) {
     this.loginRoles = {
       'USER': this.lookup.roles.USER,
-      'ADMIN': this.lookup.roles.ADMIN
+      'DOCTOR': this.lookup.roles.ADMIN
     };
     this.loginRolesKeys = Object.keys(this.loginRoles);
   }
@@ -47,10 +67,10 @@ export class SignupComponent implements OnInit {
       'username': '',
       'password': '',
       'data': {
-        'role_flags': `${this.lookup.roles.USER}`
+        'role_flags': `${this.lookup.roles.USER}`,
         'first_name': '',
         'last_name': '',
-        'phone':''
+        'ssn':''
       }
     });
   }
