@@ -31,7 +31,9 @@ import {GetRecordComponent} from "./routes/home/medical-records/get-record/get-r
 import {CropperComponent} from "./routes/dialogs/image-cropper/cropper.component";
 import {ChangePasswordDialogComponent} from "./routes/dialogs/change-password-dialog/change-password-dialog.component";
 import {ImageCropperModule} from "ng2-img-cropper";
+import {RequestDialogComponent} from "./routes/dialogs/request-dialog/request-dialog.component";
 import {AppWsService} from "./services/ws.service";
+
 
 @NgModule({
   declarations: [
@@ -51,9 +53,10 @@ import {AppWsService} from "./services/ws.service";
     GetRecordComponent,
     ChangePasswordDialogComponent,
     CropperComponent,
-    GetRecordComponent
+    GetRecordComponent,
+    RequestDialogComponent
 ],
-  entryComponents: [ ChangePasswordDialogComponent, CropperComponent],
+  entryComponents: [ ChangePasswordDialogComponent, CropperComponent, RequestDialogComponent],
 
   imports: [
     HttpModule,

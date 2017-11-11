@@ -3,10 +3,10 @@
   <form [formGroup]="searchRecordsForm">
 
     <mat-form-field class="input-container">
-      <input matInput autofocus placeholder="SSD" name="ssn" [maxlength]="16"
+      <input matInput autofocus placeholder="SSN" name="ssn" [maxlength]="16"
              [formControlName]='"ssn"' type="number" required>
       <mat-error *ngIf="searchRecordsForm.get('ssn').hasError('required')">
-        <strong>{{'SSD is required'}}</strong>
+        <strong>{{'SSN is required'}}</strong>
       </mat-error>
     </mat-form-field>
     <br>

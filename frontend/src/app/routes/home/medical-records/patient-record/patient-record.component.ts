@@ -30,16 +30,16 @@ resp = {
       "record_id": "234234234_234234",
       "record_time_created": "2017-10-12 15:12:22",
       "record_data": {
-        "title": "fuck off",
-        "description": "fuck off the beste"
+        "title": "Blood Analysis",
+        "description": "Requested from Dr. Mario Rossi"
       }
     },
     {
       "record_id": "234234234_234234",
       "record_time_created": "2017-10-21 18:12:22",
       "record_data": {
-        "title": "fuck off 2",
-        "description": "fuck off the beste 2"
+        "title": "MRI Scan",
+        "description": "Requested from Dr.Paolo Perri"
       }
     }
     ],
@@ -50,8 +50,8 @@ resp = {
       "name_doctor": "pera zikic",
       "record_time_created":  "2017-08-22 09:15:20",
       "record_data": {
-        "title": "fffffff ttt",
-        "description": "alo bre, evo neki description"
+        "title": "xxxxx",
+        "description": "dlfgsdiufgas;uodf"
       }
     },
     {
