@@ -1,0 +1,61 @@
+.app-calendar-wrapper{
+  .app-calendar-header{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .app-month{
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+
+  .app-calendar{
+    padding: 0 20px;
+    width: calc(100% - 20);
+
+    table {
+      width: 100%;
+      //border: 1px solid red;
+      border-collapse: collapse;
+
+      thead {
+        tr {
+          th{
+            height: 20px;
+            margin: 10px;
+            padding: 10px 0 0 5px;
+            border: 1px solid gray;
+            font-size: 16px;
+            font-weight: 400;
+            text-align: left;
+            border-left: transparent;
+            border-top: transparent;
+            border-right: transparent;
+          }
+        }
+      }
+      tbody {
+        tr{
+          td {
+            padding: 10px;
+            width: 10%;
+            height: 150px;
+            border: 1px solid gray;
+            font-weight: 700;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+

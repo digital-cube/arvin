@@ -1,0 +1,5 @@
+Sergio Srdjan Vemic <sergio.vemic@gmail.com>
+Slobodan Dolinic <slobodan@digitalcube.rs>
+Andrija Garabinovic <andrija@digitalcube.rs>
+Nenad Rodic <nenad@digitalcube.rs>
+

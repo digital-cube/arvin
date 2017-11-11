@@ -6,16 +6,16 @@ import unittest
 # import tornado.testing
 # from unittest import TestSuite
 
-from base.tests.api.user.test_user_change_password import TestUserChangePassword
-from base.tests.api.user.test_user_forgot_password import TestUserForgot
-from base.tests.api.user.test_user_login import TestUserLogin
-from base.tests.api.user.test_user_logout import TestUserLogout
-from base.tests.api.user.test_user_register import TestUserRegister
-from base.tests.api.utils.test_hash_2_params import TestHash2Params
-from base.tests.api.utils.test_mail_queue import TestMailQueue
-from base.tests.api.utils.test_mail_queue import TestMailQueueSetOptions
-from base.tests.api.utils.test_mail_queue import TestMailQueueGet
-from base.tests.api.utils.test_options import TestOptions
+# from base.tests.api.user.test_user_change_password import TestUserChangePassword
+# from base.tests.api.user.test_user_forgot_password import TestUserForgot
+# from base.tests.api.user.test_user_login import TestUserLogin
+# from base.tests.api.user.test_user_logout import TestUserLogout
+# from base.tests.api.user.test_user_register import TestUserRegister
+# from base.tests.api.utils.test_hash_2_params import TestHash2Params
+# from base.tests.api.utils.test_mail_queue import TestMailQueue
+# from base.tests.api.utils.test_mail_queue import TestMailQueueSetOptions
+# from base.tests.api.utils.test_mail_queue import TestMailQueueGet
+# from base.tests.api.utils.test_options import TestOptions
 
 _current_dir = os.getcwd()
 _current_dir_from_file = os.path.dirname(os.path.abspath(__file__))
@@ -24,10 +24,13 @@ if _parent_dir != _current_dir:
     os.chdir(_parent_dir)
 sys.path.append(os.path.abspath(_parent_dir))
 
-try:
-    from hello import TestHello
-except ImportError:
-    from tests.hello import TestHello
+
+from tests.medical_records import TestMedicalRecords
+
+# try:
+#     from hello import TestHello
+# except ImportError:
+#     from tests.hello import TestHello
 
 
 # def all():
