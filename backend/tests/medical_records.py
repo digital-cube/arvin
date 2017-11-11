@@ -16,11 +16,12 @@ class TestMedicalRecords(TestBase):
         from src.config.arvin_config import enc_file_path
         _path = '{}/{}'.format(enc_file_path, username)
         if os.path.exists(_path):
-            print('UUUUUUUUUUKLLONI', _path)
             os.system('rm -rf {}'.format(_path))
             # shutil.rmtree(_path)
 
     # def test_user_open_medical_record(self):
+    #
+    #     self._remove_user_data_path('user@test.loc')
     #
     #     self._register('doctor@test.loc', '123',
     #                    {"first_name": "doctor", "last_name": "test", "phone": "+234234", "role_flags": "2"})
@@ -71,6 +72,8 @@ class TestMedicalRecords(TestBase):
     #
     # def test_user_save_medical_record_with_empty_data(self):
     #
+    #     self._remove_user_data_path('user@test.loc')
+    #
     #     self._register('doctor@test.loc', '123',
     #                    {"first_name": "doctor", "last_name": "test", "phone": "+234234", "role_flags": "2"})
     #     _doc_token = self.token
@@ -107,6 +110,8 @@ class TestMedicalRecords(TestBase):
     #     self.assertEqual(res.code, 204)
     #
     # def test_user_save_medical_record_with_data(self):
+    #
+    #     self._remove_user_data_path('user@test.loc')
     #
     #     self._register('doctor@test.loc', '123',
     #                    {"first_name": "doctor", "last_name": "test", "phone": "+234234", "role_flags": "2"})
@@ -159,11 +164,104 @@ class TestMedicalRecords(TestBase):
     #
     #     res = self.fetch('/api/medical-record', method='PUT', body=_body, headers=headers)
     #     self.assertEqual(res.code, 204)
+    #
+    #
+    # def test_user_get_medical_records(self):
+    #
+    #     self._remove_user_data_path('user@test.loc')
+    #
+    #     self._register('doctor@test.loc', '123',
+    #                    {"first_name": "doctor", "last_name": "test", "phone": "+234234", "role_flags": "2"})
+    #     _doc_token = self.token
+    #
+    #     self._register('user@test.loc', '123',
+    #                    {"first_name": "user", "last_name": "test", "phone": "+234234", "role_flags": "1"})
+    #
+    #     _user_token = self.token
+    #
+    #     headers = {'Authorization': _user_token}
+    #
+    #     _pin = '1234567890'
+    #     _body = {
+    #         'pin': _pin,
+    #         'ssn': '1234567890212'
+    #     }
+    #     _body = json.dumps(_body)
+    #
+    #     res = self.fetch('/api/medical-record', method='POST', body=_body, headers=headers)
+    #     print('RES', res)
+    #     self.assertEqual(res.code, 204)
+    #
+    #     _body = {
+    #         'pin': _pin,
+    #         'weight': 100.0,
+    #         'height': 185.6,
+    #         'systolic_blood_pressure': 120,
+    #         'diastolic_blood_pressure': 80,
+    #         'blood_type': 'A+',
+    #         'own_data': json.dumps([
+    #             {
+    #                 "record_id": "234234234_234234",
+    #                 "record_time_created": "2017-10-21 15:12:22",
+    #                 "record_data": {
+    #                     "title": "fuck off",
+    #                     "description": "fuck off the beste"
+    #                 }
+    #             },
+    #             {
+    #                 "record_id": "234234234_234234",
+    #                 "record_time_created": "2017-10-21 18:12:22",
+    #                 "record_data": {
+    #                     "title": "fuck off 2",
+    #                     "description": "fuck off the beste 2"
+    #                 }
+    #             }
+    #         ])
+    #     }
+    #     _body = json.dumps(_body)
+    #
+    #     res = self.fetch('/api/medical-record', method='PUT', body=_body, headers=headers)
+    #     print('RES', res)
+    #     self.assertEqual(res.code, 204)
+    #
+    #     res = self.fetch('/api/medical-record?pin={}'.format(_pin), method='GET', headers=headers)
+    #     print('RES', res)
+    #     self.assertEqual(res.code, 200)
+    #
+    #     res = res.body.decode('utf-8')
+    #     res = json.loads(res)
+    #
+    #     self.assertIn('main', res)
+    #     self.assertIn('own_record', res)
 
+    # def test_doctor_activate_record_access(self):
+    #
+    #     self._remove_user_data_path('user@test.loc')
+    #     self._remove_user_data_path('doctor@test.loc')
+    #
+    #     self._register('doctor@test.loc', '123',
+    #                    {"first_name": "doctor", "last_name": "test", "phone": "+234234", "role_flags": "2"})
+    #     _doc_token = self.token
+    #
+    #     self._register('user@test.loc', '123',
+    #                    {"first_name": "user", "last_name": "test", "phone": "+234234", "role_flags": "1"})
+    #
+    #     _user_token = self.token
+    #
+    #     headers = {'Authorization': _doc_token}
+    #
+    #     _pin = '1234567891'
+    #     _body = { 'pin': _pin }
+    #     _body = json.dumps(_body)
+    #
+    #     res = self.fetch('/api/save-pin', method='POST', body=_body, headers=headers)
+    #     print('RES', res)
+    #     self.assertEqual(res.code, 204)
 
-    def test_user_get_medical_records(self):
+    def test_doctor_request_access_to_users_data(self):
 
         self._remove_user_data_path('user@test.loc')
+        self._remove_user_data_path('doctor@test.loc')
 
         self._register('doctor@test.loc', '123',
                        {"first_name": "doctor", "last_name": "test", "phone": "+234234", "role_flags": "2"})
@@ -174,12 +272,14 @@ class TestMedicalRecords(TestBase):
 
         _user_token = self.token
 
+
+
         headers = {'Authorization': _user_token}
 
-        _pin = '1234567890'
+        _ssn = '1234567890212'
         _body = {
-            'pin': _pin,
-            'ssn': '1234567890212'
+            'pin': '1234567890',
+            'ssn': _ssn
         }
         _body = json.dumps(_body)
 
@@ -188,7 +288,7 @@ class TestMedicalRecords(TestBase):
         self.assertEqual(res.code, 204)
 
         _body = {
-            'pin': _pin,
+            'pin': '1234567890',
             'weight': 100.0,
             'height': 185.6,
             'systolic_blood_pressure': 120,
@@ -216,16 +316,21 @@ class TestMedicalRecords(TestBase):
         _body = json.dumps(_body)
 
         res = self.fetch('/api/medical-record', method='PUT', body=_body, headers=headers)
+        self.assertEqual(res.code, 204)
+
+
+
+        headers = {'Authorization': _doc_token}
+
+        _pin = '1234567891'
+        _body = { 'pin': _pin }
+        _body = json.dumps(_body)
+
+        res = self.fetch('/api/save-pin', method='POST', body=_body, headers=headers)
         print('RES', res)
         self.assertEqual(res.code, 204)
 
-        res = self.fetch('/api/medical-record?pin={}'.format(_pin), method='GET', headers=headers)
+        res = self.fetch('/api/records-access?ssn={}'.format(_ssn), method='GET', headers=headers)
         print('RES', res)
-        self.assertEqual(res.code, 200)
+        self.assertEqual(res.code, 204)
 
-        res = res.body.decode('utf-8')
-        res = json.loads(res)
-
-        self.assertIn('main', res)
-        self.assertIn('own_record', res)
-        # self.assertEqual(res['m'], msgs.lmap[msgs.UNAUTHORIZED_REQUEST])

@@ -9,6 +9,11 @@ export class LookupService {
     'USER': 1
   };
 
+  ws_commands = {
+    'REQUEST_PERMISSION': 'REQUEST_PERMISSION',
+    'RISK_STATUS': 'RISK_STATUS'
+  };
+
   constructor() { }
 
 }

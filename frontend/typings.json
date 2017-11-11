@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "when": "registry:npm/when#2.4.0+20160723033700"
+  }
+}

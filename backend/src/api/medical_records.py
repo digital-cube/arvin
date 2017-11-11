@@ -218,25 +218,57 @@ class MedicalRecord(Base):
 @api(
     URI='/save-pin'
 )
-class MedicalRecords(Base):
+class SavePin(Base):
     @authenticated(role.ADMIN)
     @params(
         {'name': 'pin', 'type': str, 'required': True, 'doc': 'admin\'s pin'},
     )
-    def put(self, ssn):
+    def post(self, pin):
         """generate password and keys for the admin"""
+
+        _uniq_pass = uuid.uuid1()
+        _uniq_encrypted = crypt_enc_password(_uniq_pass, pin)
+        if not _uniq_encrypted:
+            return self.error(rmsgs.PASSWORD_ENCRYPTION_ERROR)
+        self.auth_user.user.enc_key = _uniq_encrypted
+
+        _record_path = get_record_path(self.auth_user)
+        if not _record_path:
+            return self.error(rmsgs.GENERATE_RECORD_PATH_ERROR)
+        if not make_record_path(_record_path):
+            return self.error(rmsgs.CREATE_RECORD_PATH_ERROR)
+        if not generate_gpg_keys(self.auth_user.username, _uniq_pass, _record_path):
+            return self.error(rmsgs.GENERATE_KEYS_ERROR)
+
+        self.auth_user.user.record_path = _record_path
+
+        _, _session = base.common.orm.get_orm_model('medical_records')
+
+        _session.commit()
+
         return self.ok()
+
 
 @api(
     URI='/records-access'
 )
-class MedicalRecords(Base):
+class MedicalRecordsRequest(Base):
     @authenticated(role.ADMIN)
     @params(
         {'name': 'ssn', 'type': str, 'required': True, 'doc': 'user\'s ssn'},
     )
     def get(self, ssn):
         """doctor request access to users records"""
+
+        MR, _session = base.common.orm.get_orm_model('medical_records')
+        _q = _session.query(MR).filter(MR.ssn == ssn)
+        if _q.count() != 1:
+            return self.error(rmsgs.MEDICAL_RECORD_COULD_NOT_BE_FOUND)
+
+        mr = _q.one()
+
+        _id_owner = mr.id
+
         return self.ok()
 
     @authenticated(role.USER)
